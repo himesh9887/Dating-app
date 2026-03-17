@@ -1,0 +1,68 @@
+@import url("https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&family=Poppins:wght@500;600;700;800&display=swap");
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    color-scheme: dark;
+  }
+
+  * {
+    @apply border-spark-line;
+  }
+
+  body {
+    @apply min-h-screen bg-spark-gradient font-body text-white antialiased;
+  }
+
+  #root {
+    @apply min-h-screen;
+  }
+
+  button,
+  input,
+  textarea,
+  select {
+    @apply outline-none;
+  }
+
+  ::selection {
+    @apply bg-spark-pink/40 text-white;
+  }
+}
+
+@layer components {
+  .glass-panel {
+    @apply rounded-[28px] border border-white/10 shadow-panel backdrop-blur-2xl;
+    background-color: rgba(255, 255, 255, 0.08);
+  }
+
+  .glass-soft {
+    @apply rounded-3xl border border-white/10 bg-white/5 backdrop-blur-xl;
+  }
+
+  .spark-input {
+    @apply w-full rounded-2xl border border-white/10 bg-black/20 px-4 py-3 text-sm text-white placeholder:text-white/40 transition focus:border-spark-pink/60 focus:bg-black/30;
+  }
+
+  .spark-button {
+    @apply inline-flex items-center justify-center rounded-2xl bg-spark-button px-5 py-3 text-sm font-semibold text-white shadow-glow transition hover:scale-[1.02] active:scale-[0.98];
+  }
+
+  .spark-button-ghost {
+    @apply inline-flex items-center justify-center rounded-2xl border border-white/10 bg-white/5 px-4 py-3 text-sm font-semibold text-white transition hover:bg-white/10;
+  }
+}
+
+@layer utilities {
+  .spark-scrollbar::-webkit-scrollbar {
+    width: 8px;
+  }
+
+  .spark-scrollbar::-webkit-scrollbar-thumb {
+    background: rgba(255, 255, 255, 0.12);
+    border-radius: 999px;
+  }
+}
