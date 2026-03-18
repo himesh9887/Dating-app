@@ -28,7 +28,7 @@ const Navbar = () => {
   return (
     <>
       {isHomePage ? (
-        <header className="sticky top-0 z-30 flex items-center justify-between bg-black px-4 pb-3 pt-3 lg:hidden">
+        <header className="sticky top-0 z-30 flex items-center justify-between bg-black px-4 pb-2.5 pt-2.5 lg:hidden">
           <Link
             to="/create"
             className="instagram-icon-button h-12 w-12"
@@ -38,7 +38,7 @@ const Navbar = () => {
           </Link>
           <Link
             to="/home"
-            className="font-logo text-[3.4rem] leading-none text-white"
+            className="font-logo text-[3.2rem] leading-none text-white"
           >
             Instagram
           </Link>

@@ -107,7 +107,7 @@ const PostCard = ({ post }) => {
       layout
       className="overflow-hidden border-b border-white/10 bg-black font-sans text-white lg:rounded-[32px] lg:border lg:border-white/10 lg:bg-white/[0.08] lg:shadow-panel lg:backdrop-blur-2xl lg:font-body"
     >
-      <div className="flex items-center justify-between gap-3 px-3.5 py-3 sm:px-5">
+      <div className="flex items-center justify-between gap-3 px-3.5 py-2.5 sm:px-5">
         <div className="min-w-0 flex items-center gap-3">
           <div
             className="rounded-full p-[2px]"
@@ -146,7 +146,7 @@ const PostCard = ({ post }) => {
               type="button"
               onClick={() => setFollowing((current) => !current)}
               className={classNames(
-                "min-w-[152px] rounded-2xl px-5 py-2.5 text-[18px] font-semibold transition",
+                "min-w-[152px] rounded-[14px] px-5 py-2.5 text-[17px] font-semibold transition",
                 following
                   ? "border border-white/15 bg-[#2f3238] text-white/80"
                   : "bg-[#2f3238] text-white",
@@ -171,7 +171,7 @@ const PostCard = ({ post }) => {
             src={post.media[0].url}
             alt={post.caption}
             loading="lazy"
-            className="aspect-[100/86] w-full object-cover sm:h-[560px] sm:aspect-auto lg:h-[520px] xl:h-[640px]"
+            className="aspect-[100/92] w-full object-cover sm:h-[560px] sm:aspect-auto lg:h-[520px] xl:h-[640px]"
           />
           <div className="absolute right-4 top-4 rounded-full bg-black/55 px-3 py-1 text-sm font-medium text-white backdrop-blur-sm">
             1/{displayMediaCount}
@@ -199,8 +199,8 @@ const PostCard = ({ post }) => {
         ))}
       </div>
 
-      <div className="flex items-center justify-between gap-3 px-4 pt-4 sm:px-5">
-        <div className="flex min-w-0 items-center gap-4 overflow-x-auto pr-2 text-[15px] font-semibold">
+      <div className="flex items-center justify-between gap-3 px-4 pt-3.5 sm:px-5">
+        <div className="flex min-w-0 items-center gap-[18px] overflow-x-auto pr-2 text-[14px] font-semibold">
           {actionItems.map((item) => {
             const Icon = item.icon;
 
@@ -213,7 +213,7 @@ const PostCard = ({ post }) => {
                 aria-label={item.key}
               >
                 <Icon
-                  size={30}
+                  size={31}
                   className={classNames(
                     item.active ? "fill-current text-[#ff3040]" : "",
                   )}
@@ -234,8 +234,8 @@ const PostCard = ({ post }) => {
         </button>
       </div>
 
-      <div className="px-4 pb-4 pt-3 sm:px-5">
-        <p className="truncate text-[16px] leading-7">
+      <div className="px-4 pb-4 pt-2.5 sm:px-5">
+        <p className="truncate text-[16px] leading-6">
           <span className="font-semibold">{post.author.username}</span>{" "}
           <span className="text-white/88">{post.caption}</span>
         </p>

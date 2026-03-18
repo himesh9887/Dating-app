@@ -80,8 +80,8 @@ const HomePage = () => {
   return (
     <div className="space-y-0 lg:space-y-5">
       <div className="bg-black font-sans lg:hidden">
-        <section className="bg-black px-3 pb-3 pt-1">
-          <div className="spark-scrollbar flex gap-[18px] overflow-x-auto pb-1 pt-1">
+        <section className="bg-black px-3 pb-2.5 pt-0.5">
+          <div className="spark-scrollbar flex gap-4 overflow-x-auto pb-1 pt-1">
             {storyComposer}
             {stories.map((story) => (
               <StoryCard key={story._id} story={story} onClick={setActiveStory} />

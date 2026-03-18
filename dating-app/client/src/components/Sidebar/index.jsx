@@ -81,7 +81,7 @@ const Sidebar = () => {
       <motion.nav
         initial={{ y: 40, opacity: 0 }}
         animate={{ y: 0, opacity: 1 }}
-        className="fixed inset-x-0 bottom-0 z-30 border-t border-white/10 bg-black px-5 pt-2 backdrop-blur-xl lg:hidden"
+        className="fixed inset-x-0 bottom-0 z-30 bg-black px-5 pt-2 backdrop-blur-xl lg:hidden"
         style={{ paddingBottom: "calc(env(safe-area-inset-bottom, 0px) + 12px)" }}
       >
         <div className="mx-auto flex w-full max-w-md items-center justify-between">
