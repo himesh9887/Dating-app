@@ -36,7 +36,7 @@ const formatFeedAge = (value) => {
 };
 
 const getAudioLabel = (post) =>
-  post.audioTrack || post.author?.location?.label || "Original audio";
+  post.displayAudioLabel || post.audioTrack || "Darshan Rawal, Aditi Singh Sharma...";
 
 const PostCard = ({ post }) => {
   const dispatch = useDispatch();
@@ -52,9 +52,16 @@ const PostCard = ({ post }) => {
   const comments = post.comments || [];
   const hashtags = post.hashtags || [];
   const mediaCount = Math.max(post.media?.length || 1, 1);
+  const displayMediaCount = post.displayMediaCount || (mediaCount === 1 ? 20 : mediaCount);
   const indicatorCount = mediaCount > 1 ? Math.min(mediaCount, 6) : 5;
   const isLiked = likes.includes(viewerId);
   const isOwnPost = post.author?._id === viewerId;
+  const likesDisplay = post.displayCounts?.likes ?? likes.length;
+  const commentsDisplay = post.displayCounts?.comments ?? comments.length;
+  const repostsDisplay =
+    post.displayCounts?.reposts ?? post.repostCount ?? Math.max((post.shareCount || 0) - 1, 0);
+  const sharesDisplay = post.displayCounts?.shares ?? (post.shareCount || 0);
+  const ageLabel = post.displayAge || formatFeedAge(post.createdAt);
 
   const submitComment = (event) => {
     event.preventDefault();
@@ -72,35 +79,35 @@ const PostCard = ({ post }) => {
     {
       key: "likes",
       icon: Heart,
-      count: formatCount(likes.length),
+      count: formatCount(likesDisplay + (isLiked ? 1 : 0)),
       active: isLiked,
       onClick: () => dispatch(likePost(post._id)),
     },
     {
       key: "comments",
       icon: MessageCircle,
-      count: formatCount(comments.length),
+      count: formatCount(commentsDisplay),
       active: showComposer,
       onClick: () => setShowComposer((current) => !current),
     },
     {
       key: "reposts",
       icon: Repeat2,
-      count: formatCount(post.repostCount ?? Math.max((post.shareCount || 0) - 1, 0)),
+      count: formatCount(repostsDisplay),
     },
     {
       key: "shares",
       icon: Send,
-      count: formatCount(post.shareCount || 0),
+      count: formatCount(sharesDisplay),
     },
   ];
 
   return (
     <motion.article
       layout
-      className="overflow-hidden border-b border-white/10 bg-black text-white lg:rounded-[32px] lg:border lg:border-white/10 lg:bg-white/[0.08] lg:shadow-panel lg:backdrop-blur-2xl"
+      className="overflow-hidden border-b border-white/10 bg-black font-sans text-white lg:rounded-[32px] lg:border lg:border-white/10 lg:bg-white/[0.08] lg:shadow-panel lg:backdrop-blur-2xl lg:font-body"
     >
-      <div className="flex items-start justify-between gap-3 px-4 py-3 sm:px-5">
+      <div className="flex items-center justify-between gap-3 px-3.5 py-3 sm:px-5">
         <div className="min-w-0 flex items-center gap-3">
           <div
             className="rounded-full p-[2px]"
@@ -117,15 +124,17 @@ const PostCard = ({ post }) => {
           </div>
           <div className="min-w-0">
             <div className="flex items-center gap-2">
-              <h3 className="truncate text-[15px] font-semibold">{post.author.username}</h3>
+              <h3 className="truncate text-[17px] font-semibold leading-none">
+                {post.author.username}
+              </h3>
               {post.author.location?.label ? (
                 <span className="hidden truncate text-xs text-white/40 sm:inline">
                   {post.author.location.label}
                 </span>
               ) : null}
             </div>
-            <p className="flex items-center gap-1 text-xs text-white/55">
-              <Music2 size={12} />
+            <p className="mt-1 flex items-center gap-1 text-[13px] leading-none text-white/80">
+              <Music2 size={13} />
               <span className="truncate">{getAudioLabel(post)}</span>
             </p>
           </div>
@@ -137,10 +146,10 @@ const PostCard = ({ post }) => {
               type="button"
               onClick={() => setFollowing((current) => !current)}
               className={classNames(
-                "rounded-xl px-4 py-2 text-sm font-semibold transition",
+                "min-w-[152px] rounded-2xl px-5 py-2.5 text-[18px] font-semibold transition",
                 following
-                  ? "border border-white/15 bg-white/5 text-white/80"
-                  : "bg-white text-black",
+                  ? "border border-white/15 bg-[#2f3238] text-white/80"
+                  : "bg-[#2f3238] text-white",
               )}
             >
               {following ? "Following" : "Follow"}
@@ -148,7 +157,7 @@ const PostCard = ({ post }) => {
           ) : null}
           <button
             type="button"
-            className="instagram-icon-button h-10 w-10"
+            className="flex h-10 w-8 items-center justify-center text-white"
             aria-label="More options"
           >
             <MoreHorizontal size={22} />
@@ -162,18 +171,18 @@ const PostCard = ({ post }) => {
             src={post.media[0].url}
             alt={post.caption}
             loading="lazy"
-            className="h-[440px] w-full object-cover sm:h-[560px] lg:h-[520px] xl:h-[640px]"
+            className="aspect-[100/86] w-full object-cover sm:h-[560px] sm:aspect-auto lg:h-[520px] xl:h-[640px]"
           />
           <div className="absolute right-4 top-4 rounded-full bg-black/55 px-3 py-1 text-sm font-medium text-white backdrop-blur-sm">
-            1/{mediaCount}
+            1/{displayMediaCount}
           </div>
           <button
             type="button"
             onClick={() => setSoundOn((current) => !current)}
-            className="absolute bottom-4 right-4 flex h-11 w-11 items-center justify-center rounded-full bg-black/55 text-white backdrop-blur-sm"
+            className="absolute bottom-4 right-4 flex h-10 w-10 items-center justify-center rounded-full bg-black/55 text-white backdrop-blur-sm"
             aria-label={soundOn ? "Mute post audio" : "Unmute post audio"}
           >
-            <Volume2 size={18} />
+            <Volume2 size={17} />
           </button>
         </div>
       ) : null}
@@ -191,7 +200,7 @@ const PostCard = ({ post }) => {
       </div>
 
       <div className="flex items-center justify-between gap-3 px-4 pt-4 sm:px-5">
-        <div className="flex min-w-0 items-center gap-5 overflow-x-auto pr-2 text-[15px] font-semibold">
+        <div className="flex min-w-0 items-center gap-4 overflow-x-auto pr-2 text-[15px] font-semibold">
           {actionItems.map((item) => {
             const Icon = item.icon;
 
@@ -204,7 +213,7 @@ const PostCard = ({ post }) => {
                 aria-label={item.key}
               >
                 <Icon
-                  size={28}
+                  size={30}
                   className={classNames(
                     item.active ? "fill-current text-[#ff3040]" : "",
                   )}
@@ -225,8 +234,8 @@ const PostCard = ({ post }) => {
         </button>
       </div>
 
-      <div className="px-4 pb-5 pt-4 sm:px-5">
-        <p className="text-sm leading-6">
+      <div className="px-4 pb-4 pt-3 sm:px-5">
+        <p className="truncate text-[16px] leading-7">
           <span className="font-semibold">{post.author.username}</span>{" "}
           <span className="text-white/88">{post.caption}</span>
         </p>
@@ -237,7 +246,7 @@ const PostCard = ({ post }) => {
           </p>
         ) : null}
 
-        {comments.length ? (
+        {comments.length && !post.hideLastComment ? (
           <p className="mt-3 text-sm text-white/65">
             <span className="font-semibold text-white/90">
               {comments[comments.length - 1].user.username}
@@ -246,10 +255,10 @@ const PostCard = ({ post }) => {
           </p>
         ) : null}
 
-        <div className="mt-3 flex items-center gap-2 text-xs text-white/40">
-          <span>{formatFeedAge(post.createdAt)}</span>
+        <div className="mt-2 flex items-center gap-2 text-[14px] text-white/55">
+          <span>{ageLabel}</span>
           <span>&bull;</span>
-          <button type="button" className="font-medium text-white/70">
+          <button type="button" className="font-medium text-white/80">
             See translation
           </button>
         </div>

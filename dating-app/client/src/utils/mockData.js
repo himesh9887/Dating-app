@@ -32,42 +32,27 @@ export const demoStories = [
     _id: "story-1",
     author: {
       _id: "u2",
-      username: "zyra",
-      name: "Zyra Noor",
+      username: "rajputt_jiyaa",
+      name: "Rajputt Jiyaa",
       profilePhotos: [
         {
-          url: "https://images.unsplash.com/photo-1517841905240-472988babdf9?auto=format&fit=crop&w=900&q=80",
+          url: "https://images.unsplash.com/photo-1494790108755-2616b612b786?auto=format&fit=crop&w=900&q=80",
         },
       ],
     },
     media: {
-      url: "https://images.unsplash.com/photo-1511988617509-a57c8a288659?auto=format&fit=crop&w=900&q=80",
+      url: "https://images.unsplash.com/photo-1494790108755-2616b612b786?auto=format&fit=crop&w=900&q=80",
       type: "image",
     },
-    caption: "Neon coffee date mood",
+    caption: "Golden glow",
     createdAt: new Date(Date.now() - 45 * 60 * 1000).toISOString(),
   },
   {
     _id: "story-2",
     author: {
-      _id: "user-demo-1",
-      username: "novalane",
-      name: "Nova Lane",
-      profilePhotos: demoUser.profilePhotos,
-    },
-    media: {
-      url: "https://images.unsplash.com/photo-1500530855697-b586d89ba3ee?auto=format&fit=crop&w=900&q=80",
-      type: "image",
-    },
-    caption: "Golden hour and zero plans",
-    createdAt: new Date(Date.now() - 2 * 60 * 60 * 1000).toISOString(),
-  },
-  {
-    _id: "story-3",
-    author: {
       _id: "u3",
-      username: "kairo",
-      name: "Kairo Reed",
+      username: "kumar_anil_40",
+      name: "Kumar Anil",
       profilePhotos: [
         {
           url: "https://images.unsplash.com/photo-1500648767791-00dcc994a43e?auto=format&fit=crop&w=900&q=80",
@@ -75,11 +60,49 @@ export const demoStories = [
       ],
     },
     media: {
-      url: "https://images.unsplash.com/photo-1500534623283-312aade485b7?auto=format&fit=crop&w=900&q=80",
+      url: "https://images.unsplash.com/photo-1500648767791-00dcc994a43e?auto=format&fit=crop&w=900&q=80",
       type: "image",
     },
-    caption: "Gym, code, repeat",
+    caption: "Brothers forever",
+    createdAt: new Date(Date.now() - 2 * 60 * 60 * 1000).toISOString(),
+  },
+  {
+    _id: "story-3",
+    author: {
+      _id: "u4",
+      username: "payalchauhan",
+      name: "Payal Chauhan",
+      profilePhotos: [
+        {
+          url: "https://images.unsplash.com/photo-1544005313-94ddf0286df2?auto=format&fit=crop&w=900&q=80",
+        },
+      ],
+    },
+    media: {
+      url: "https://images.unsplash.com/photo-1544005313-94ddf0286df2?auto=format&fit=crop&w=900&q=80",
+      type: "image",
+    },
+    caption: "Soft portrait",
     createdAt: new Date(Date.now() - 5 * 60 * 60 * 1000).toISOString(),
+  },
+  {
+    _id: "story-4",
+    author: {
+      _id: "u5",
+      username: "soniyaa_777",
+      name: "Soniyaa",
+      profilePhotos: [
+        {
+          url: "https://images.unsplash.com/photo-1488426862026-3ee34a7d66df?auto=format&fit=crop&w=900&q=80",
+        },
+      ],
+    },
+    media: {
+      url: "https://images.unsplash.com/photo-1488426862026-3ee34a7d66df?auto=format&fit=crop&w=900&q=80",
+      type: "image",
+    },
+    caption: "Story frame",
+    createdAt: new Date(Date.now() - 7 * 60 * 60 * 1000).toISOString(),
   },
 ];
 
@@ -88,32 +111,33 @@ export const demoPosts = [
     _id: "post-1",
     author: {
       _id: "u2",
-      username: "zyra",
-      name: "Zyra Noor",
+      username: "love_x_rj_06",
+      name: "Love X RJ",
       profilePhotos: demoStories[0].author.profilePhotos,
-      location: { label: "Mumbai, India" },
+      location: { label: "Darshan Raval, Aditi Singh Sharma..." },
     },
     media: [
       {
-        url: "https://images.unsplash.com/photo-1494790108755-2616b612b786?auto=format&fit=crop&w=1200&q=80",
+        url: "https://images.unsplash.com/photo-1516589178581-6cd7833ae3b2?auto=format&fit=crop&w=1200&q=80",
         type: "image",
       },
     ],
-    caption: "Soft launch of a very good week. #citylights #maincharacter",
-    hashtags: ["citylights", "maincharacter"],
+    caption: '#🎂 How to let your oth... more',
+    hashtags: [],
     likes: ["user-demo-1", "u4", "u5", "u7"],
-    comments: [
-      {
-        _id: "c1",
-        user: {
-          username: "novalane",
-          profilePhotos: demoUser.profilePhotos,
-        },
-        comment: "You absolutely ate this.",
-      },
-    ],
-    shareCount: 4,
-    createdAt: new Date(Date.now() - 80 * 60 * 1000).toISOString(),
+    comments: [],
+    shareCount: 3690,
+    displayCounts: {
+      likes: 6332,
+      comments: 18,
+      reposts: 501,
+      shares: 3690,
+    },
+    displayAudioLabel: "Darshan Raval, Aditi Singh Shar...",
+    displayAge: "4 days ago",
+    displayMediaCount: 20,
+    hideLastComment: true,
+    createdAt: new Date(Date.now() - 4 * 24 * 60 * 60 * 1000).toISOString(),
   },
   {
     _id: "post-2",

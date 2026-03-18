@@ -1,26 +1,14 @@
 import { AnimatePresence, motion } from "framer-motion";
-import {
-  Bookmark,
-  Heart,
-  MessageCircle,
-  MoreVertical,
-  Music2,
-  Plus,
-  Repeat2,
-  Send,
-  Sparkles,
-} from "lucide-react";
+import { Plus, Sparkles } from "lucide-react";
 import { useEffect, useRef, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { Link } from "react-router-dom";
 import Loader from "../../components/common/Loader";
 import SectionHeader from "../../components/common/SectionHeader";
+import PostCard from "../../components/PostCard";
 import StoryCard from "../../components/StoryCard";
-import { createStory, fetchFeed, fetchStories, likePost } from "../../redux/slices/postSlice";
+import { createStory, fetchFeed, fetchStories } from "../../redux/slices/postSlice";
 import { getPrimaryPhoto } from "../../utils/helpers";
-import { demoReels } from "../../utils/mockData";
-
-const formatReelCount = (value = 0) => new Intl.NumberFormat("en-US").format(value);
 
 const HomePage = () => {
   const dispatch = useDispatch();
@@ -29,8 +17,6 @@ const HomePage = () => {
   const loadMoreRef = useRef(null);
   const storyInputRef = useRef(null);
   const [activeStory, setActiveStory] = useState(null);
-  const [likedReels, setLikedReels] = useState({});
-  const [followedReels, setFollowedReels] = useState({});
 
   useEffect(() => {
     if (!feed.length) {
@@ -67,166 +53,64 @@ const HomePage = () => {
     }
   };
 
-  const mobileReels = (feed.length
-    ? feed.map((post) => ({
-        _id: post._id,
-        sourcePostId: post._id,
-        author: post.author,
-        media: { url: post.media?.[0]?.url || getPrimaryPhoto(post.author), type: "image" },
-        caption: post.caption,
-        audio: post.author?.location?.label || "Original audio",
-        likes: post.likes?.length || 0,
-        comments: post.comments?.length || 0,
-        remixes: post.shareCount || 0,
-        shares: post.shareCount || 0,
-      }))
-    : demoReels
-  ).filter((item) => item.media?.url);
-
   const storyComposer = (
     <button
       type="button"
       onClick={() => storyInputRef.current?.click()}
-      className="flex w-[88px] shrink-0 flex-col items-center gap-2 text-center"
+      className="flex w-[92px] shrink-0 flex-col items-center gap-2 text-center font-sans"
     >
       <div className="relative">
-        <div className="flex h-[84px] w-[84px] items-center justify-center rounded-full border border-white/10 bg-[#121212]">
+        <div className="flex h-[88px] w-[88px] items-center justify-center rounded-full border border-white/10 bg-[#121212]">
           <img
             src={getPrimaryPhoto(currentUser)}
             alt={currentUser?.name || "Your story"}
-            className="h-[76px] w-[76px] rounded-full object-cover"
+            className="h-[80px] w-[80px] rounded-full object-cover"
           />
         </div>
-        <span className="absolute bottom-1 right-1 flex h-7 w-7 items-center justify-center rounded-full border-2 border-black bg-[#0095f6] text-white">
-          <Plus size={16} strokeWidth={2.5} />
+        <span className="absolute bottom-1 right-1 flex h-8 w-8 items-center justify-center rounded-full border-[3px] border-black bg-white text-black">
+          <Plus size={18} strokeWidth={2.8} />
         </span>
       </div>
-      <span className="line-clamp-1 w-full text-[13px] text-white/85">Your story</span>
+      <span className="line-clamp-1 w-full text-[12.5px] font-medium leading-4 text-white/90">
+        Your story
+      </span>
     </button>
   );
 
   return (
     <div className="space-y-0 lg:space-y-5">
-      <div className="lg:hidden">
-        {mobileReels.length ? (
-          <div className="snap-y snap-mandatory">
-            {mobileReels.map((reel) => {
-              const isLiked = Boolean(likedReels[reel._id]);
-              const isFollowed = Boolean(followedReels[reel._id]);
-
-              return (
-                <section
-                  key={reel._id}
-                  className="relative h-[calc(100vh-88px)] snap-start overflow-hidden bg-black"
-                >
-                  <img
-                    src={reel.media.url}
-                    alt={reel.caption}
-                    className="h-full w-full object-cover"
-                  />
-                  <div className="absolute inset-0 bg-gradient-to-b from-black/20 via-transparent to-black/80" />
-
-                  <div className="absolute bottom-32 right-3 z-10 flex flex-col items-center gap-5">
-                    <button
-                      type="button"
-                      onClick={() => {
-                        setLikedReels((current) => ({ ...current, [reel._id]: !current[reel._id] }));
-                        if (reel.sourcePostId) {
-                          dispatch(likePost(reel.sourcePostId));
-                        }
-                      }}
-                      className="flex flex-col items-center gap-1 text-white"
-                    >
-                      <Heart size={34} className={isLiked ? "fill-current text-[#ff3040]" : ""} />
-                      <span className="text-sm font-semibold">
-                        {formatReelCount(reel.likes + (isLiked ? 1 : 0))}
-                      </span>
-                    </button>
-
-                    <button type="button" className="flex flex-col items-center gap-1 text-white">
-                      <MessageCircle size={34} />
-                      <span className="text-sm font-semibold">
-                        {formatReelCount(reel.comments)}
-                      </span>
-                    </button>
-
-                    <button type="button" className="flex flex-col items-center gap-1 text-white">
-                      <Repeat2 size={34} />
-                      <span className="text-sm font-semibold">
-                        {formatReelCount(reel.remixes)}
-                      </span>
-                    </button>
-
-                    <button type="button" className="flex flex-col items-center gap-1 text-white">
-                      <Send size={34} />
-                    </button>
-
-                    <button type="button" className="flex flex-col items-center gap-1 text-white">
-                      <Bookmark size={34} />
-                      <span className="text-sm font-semibold">
-                        {formatReelCount(reel.shares)}
-                      </span>
-                    </button>
-
-                    <button type="button" className="text-white">
-                      <MoreVertical size={28} />
-                    </button>
-
-                    <div className="h-11 w-11 overflow-hidden rounded-xl border border-white/30">
-                      <img
-                        src={getPrimaryPhoto(reel.author)}
-                        alt={reel.author.username}
-                        className="h-full w-full object-cover"
-                      />
-                    </div>
-                  </div>
-
-                  <div className="absolute inset-x-0 bottom-7 z-10 px-4 text-white">
-                    <div className="max-w-[calc(100%-78px)]">
-                      <div className="flex items-center gap-3">
-                        <img
-                          src={getPrimaryPhoto(reel.author)}
-                          alt={reel.author.name}
-                          className="h-11 w-11 rounded-full border border-white/20 object-cover"
-                        />
-                        <div className="min-w-0 flex-1">
-                          <p className="truncate text-[15px] font-semibold">
-                            {reel.author.username}
-                          </p>
-                          <p className="flex items-center gap-1 text-sm text-white/80">
-                            <Music2 size={14} />
-                            <span className="truncate">{reel.audio}</span>
-                          </p>
-                        </div>
-                        <button
-                          type="button"
-                          onClick={() =>
-                            setFollowedReels((current) => ({
-                              ...current,
-                              [reel._id]: !current[reel._id],
-                            }))
-                          }
-                          className="rounded-2xl border border-white/70 px-5 py-2 text-base font-semibold text-white"
-                        >
-                          {isFollowed ? "Following" : "Follow"}
-                        </button>
-                      </div>
-                      <p className="mt-3 line-clamp-2 pr-2 text-[15px] text-white/92">
-                        {reel.caption}
-                      </p>
-                    </div>
-                  </div>
-                </section>
-              );
-            })}
+      <div className="bg-black font-sans lg:hidden">
+        <section className="bg-black px-3 pb-3 pt-1">
+          <div className="spark-scrollbar flex gap-[18px] overflow-x-auto pb-1 pt-1">
+            {storyComposer}
+            {stories.map((story) => (
+              <StoryCard key={story._id} story={story} onClick={setActiveStory} />
+            ))}
           </div>
-        ) : (
-          <div className="flex h-[calc(100vh-88px)] items-center justify-center bg-black text-white/60">
-            Loading reels...
-          </div>
-        )}
+        </section>
 
-        {status === "loading" ? <Loader label="Loading reels..." /> : null}
+        {!feed.length && status === "succeeded" ? (
+          <div className="px-6 py-12 text-center">
+            <p className="text-xs uppercase tracking-[0.3em] text-white/35">Feed reset</p>
+            <h3 className="mt-4 font-display text-2xl font-semibold">
+              Your mobile feed is ready for fresh posts.
+            </h3>
+            <p className="mt-3 text-sm text-white/60">
+              Follow more people or create your first post to start filling this screen.
+            </p>
+            <Link to="/create" className="mt-6 inline-flex rounded-xl bg-white px-5 py-3 text-sm font-semibold text-black">
+              Create a post
+            </Link>
+          </div>
+        ) : null}
+
+        <div className="space-y-0">
+          {feed.map((post) => (
+            <PostCard key={post._id} post={post} />
+          ))}
+        </div>
+
+        {status === "loading" ? <Loader label="Loading your feed..." /> : null}
       </div>
 
       <div className="hidden lg:block lg:space-y-5">
@@ -288,28 +172,9 @@ const HomePage = () => {
               </div>
             ) : null}
 
-            <div className="grid gap-4 xl:grid-cols-2">
-              {mobileReels.map((reel) => (
-                <div key={`desktop-${reel._id}`} className="glass-panel overflow-hidden">
-                  <div className="relative h-[420px]">
-                    <img
-                      src={reel.media.url}
-                      alt={reel.caption}
-                      className="h-full w-full object-cover"
-                    />
-                    <div className="absolute inset-0 bg-gradient-to-t from-black/80 to-transparent" />
-                    <div className="absolute bottom-0 p-5">
-                      <div className="mb-3 inline-flex rounded-full bg-white/10 px-3 py-1 text-xs uppercase tracking-[0.2em] text-white/80">
-                        <Sparkles size={12} className="mr-2" />
-                        Reel
-                      </div>
-                      <h3 className="text-lg font-semibold">@{reel.author.username}</h3>
-                      <p className="mt-2 line-clamp-2 text-sm text-white/75">{reel.caption}</p>
-                    </div>
-                  </div>
-                </div>
-              ))}
-            </div>
+            {feed.map((post) => (
+              <PostCard key={post._id} post={post} />
+            ))}
 
             {status === "loading" ? <Loader label="Loading the next wave..." /> : null}
           </div>

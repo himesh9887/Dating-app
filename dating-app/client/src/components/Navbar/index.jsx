@@ -1,4 +1,4 @@
-import { Bell, ChevronDown, Plus, Search, Sparkles } from "lucide-react";
+import { Bell, ChevronDown, Heart, Plus, Search, Sparkles } from "lucide-react";
 import { Link, useLocation } from "react-router-dom";
 import { classNames } from "../../utils/helpers";
 import { demoStories } from "../../utils/mockData";
@@ -17,17 +17,43 @@ const pageTitles = {
 const Navbar = () => {
   const location = useLocation();
   const isHomePage = location.pathname === "/home";
-  const isReelsPage = location.pathname === "/home" || location.pathname === "/discover";
+  const isDiscoverPage = location.pathname === "/discover";
   const isSearchPage = location.pathname === "/search";
   const isProfilePage = location.pathname.startsWith("/profile/");
-  const hideMobileDefaultHeader = isReelsPage || isSearchPage || isProfilePage;
+  const hideMobileDefaultHeader = isHomePage || isDiscoverPage || isSearchPage || isProfilePage;
   const title = location.pathname.startsWith("/profile/")
     ? "Profile"
     : pageTitles[location.pathname] || "Spark";
 
   return (
     <>
-      {isReelsPage ? (
+      {isHomePage ? (
+        <header className="sticky top-0 z-30 flex items-center justify-between bg-black px-4 pb-3 pt-3 lg:hidden">
+          <Link
+            to="/create"
+            className="instagram-icon-button h-12 w-12"
+            aria-label="Create post"
+          >
+            <Plus size={34} strokeWidth={1.7} />
+          </Link>
+          <Link
+            to="/home"
+            className="font-logo text-[3.4rem] leading-none text-white"
+          >
+            Instagram
+          </Link>
+          <Link
+            to="/notifications"
+            className="relative instagram-icon-button h-12 w-12"
+            aria-label="Notifications"
+          >
+            <Heart size={30} strokeWidth={1.9} />
+            <span className="absolute right-2 top-2.5 h-2.5 w-2.5 rounded-full bg-red-500" />
+          </Link>
+        </header>
+      ) : null}
+
+      {isDiscoverPage ? (
         <header className="sticky top-0 z-30 flex items-center justify-between bg-black/90 px-4 pb-3 pt-4 backdrop-blur-xl lg:hidden">
           <Link
             to="/create"
@@ -51,7 +77,7 @@ const Navbar = () => {
               type="button"
               className={classNames(
                 "text-2xl font-semibold",
-                location.pathname === "/discover" ? "text-white" : "text-white/55",
+                "text-white",
               )}
             >
               Friends
