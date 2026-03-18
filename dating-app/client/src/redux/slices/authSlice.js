@@ -1,5 +1,6 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 import authService from "../../services/authService";
+import { updateProfile } from "./userSlice";
 import { normalizeError } from "../../utils/helpers";
 
 const storedToken = localStorage.getItem("spark-token");
@@ -110,6 +111,10 @@ const authSlice = createSlice({
       .addCase(loadCurrentUser.fulfilled, (state, action) => {
         state.user = action.payload.user;
         state.isAuthenticated = true;
+      })
+      .addCase(updateProfile.fulfilled, (state, action) => {
+        state.user = action.payload.user;
+        localStorage.setItem("spark-user", JSON.stringify(state.user));
       });
   },
 });

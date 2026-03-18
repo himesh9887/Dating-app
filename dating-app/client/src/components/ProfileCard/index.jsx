@@ -16,17 +16,17 @@ const ProfileCard = () => {
         <img
           src={getPrimaryPhoto(user)}
           alt={user.name}
-          className="h-64 w-full rounded-[24px] object-cover"
+          className="h-56 w-full rounded-[24px] object-cover sm:h-64"
         />
         <div className="absolute inset-x-0 bottom-0 rounded-b-[24px] bg-gradient-to-t from-black/70 to-transparent p-4">
-          <div className="flex items-center justify-between">
-            <div>
+          <div className="flex items-end justify-between gap-3">
+            <div className="min-w-0">
               <h3 className="font-display text-xl font-semibold">
                 {user.name}, {user.age}
               </h3>
               <p className="mt-1 flex items-center gap-1 text-sm text-white/70">
                 <MapPin size={14} />
-                {user.location?.label}
+                {user.location?.label || "Location hidden"}
               </p>
             </div>
             <span className="rounded-full border border-white/10 bg-black/30 px-3 py-1 text-xs font-semibold uppercase tracking-[0.2em] text-spark-mint">
@@ -35,7 +35,9 @@ const ProfileCard = () => {
           </div>
         </div>
       </div>
-      <p className="mt-4 text-sm text-white/[0.65]">{user.bio}</p>
+      <p className="mt-4 text-sm text-white/[0.65]">
+        {user.bio || "Add a bio so people can catch your vibe faster."}
+      </p>
       <div className="mt-4 grid grid-cols-2 gap-3">
         <div className="glass-soft p-4">
           <div className="flex items-center gap-2 text-white/50">
@@ -57,7 +59,7 @@ const ProfileCard = () => {
         </div>
       </div>
       <Link
-        to={`/profile/${user.username}`}
+        to={user?.username ? `/profile/${user.username}` : "/settings"}
         className="spark-button mt-4 w-full"
       >
         View profile

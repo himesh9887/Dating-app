@@ -16,14 +16,18 @@ const LoginPage = () => {
 
   const handleSubmit = async (event) => {
     event.preventDefault();
-    await dispatch(loginUser(form)).unwrap();
-    navigate("/home");
+    try {
+      await dispatch(loginUser(form)).unwrap();
+      navigate("/home");
+    } catch (_error) {
+      // Errors are surfaced via Redux state.
+    }
   };
 
   return (
     <motion.div initial={{ opacity: 0, y: 18 }} animate={{ opacity: 1, y: 0 }}>
       <p className="text-xs uppercase tracking-[0.3em] text-white/40">Welcome back</p>
-      <h2 className="mt-3 font-display text-4xl font-semibold">Log into Spark</h2>
+      <h2 className="mt-3 font-display text-3xl font-semibold sm:text-4xl">Log into Spark</h2>
       <p className="mt-2 text-sm text-white/60">
         Your feed, matches, stories, and messages are waiting.
       </p>
@@ -52,8 +56,12 @@ const LoginPage = () => {
         <div className="mt-4 overflow-hidden rounded-2xl">
           <GoogleLogin
             onSuccess={async (credentialResponse) => {
-              await dispatch(googleAuth(credentialResponse.credential)).unwrap();
-              navigate("/home");
+              try {
+                await dispatch(googleAuth(credentialResponse.credential)).unwrap();
+                navigate("/home");
+              } catch (_error) {
+                // Errors are surfaced via Redux state.
+              }
             }}
             onError={() => null}
             theme="filled_black"
@@ -62,7 +70,7 @@ const LoginPage = () => {
         </div>
       ) : null}
 
-      <div className="mt-5 flex items-center justify-between text-sm text-white/[0.55]">
+      <div className="mt-5 flex flex-wrap items-center justify-between gap-3 text-sm text-white/[0.55]">
         <button type="button" className="hover:text-white">
           Forgot password
         </button>

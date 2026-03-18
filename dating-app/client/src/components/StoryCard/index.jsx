@@ -1,19 +1,29 @@
+import { getPrimaryPhoto } from "../../utils/helpers";
+
 const StoryCard = ({ story, onClick }) => (
   <button
     type="button"
     onClick={() => onClick?.(story)}
-    className="group flex w-20 flex-col items-center gap-2 text-center"
+    className="group flex w-[88px] shrink-0 flex-col items-center gap-2 text-center"
   >
-    <div className="rounded-[26px] bg-spark-button p-[2px] transition group-hover:scale-105">
-      <div className="rounded-[24px] bg-spark-base p-[3px]">
+    <div
+      className="rounded-full p-[3px] transition duration-200 group-hover:scale-105"
+      style={{
+        backgroundImage:
+          "linear-gradient(135deg, #f9ce34 0%, #ee2a7b 52%, #6228d7 100%)",
+      }}
+    >
+      <div className="rounded-full bg-black p-[3px]">
         <img
-          src={story.author.profilePhotos?.[0]?.url}
+          src={getPrimaryPhoto(story.author)}
           alt={story.author.name}
-          className="h-16 w-16 rounded-[20px] object-cover"
+          className="h-[76px] w-[76px] rounded-full object-cover"
         />
       </div>
     </div>
-    <span className="line-clamp-1 text-xs text-white/70">{story.author.username}</span>
+    <span className="line-clamp-1 w-full text-[13px] text-white/85">
+      {story.author.username}
+    </span>
   </button>
 );
 

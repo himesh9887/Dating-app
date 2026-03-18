@@ -29,6 +29,7 @@ export default {
       fontFamily: {
         display: ["Poppins", "ui-sans-serif", "system-ui"],
         body: ["Manrope", "ui-sans-serif", "system-ui"],
+        logo: ["Grand Hotel", "cursive"],
       },
       animation: {
         float: "float 6s ease-in-out infinite",

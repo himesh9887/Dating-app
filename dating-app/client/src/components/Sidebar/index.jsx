@@ -1,15 +1,27 @@
 import { motion } from "framer-motion";
-import { LogOut } from "lucide-react";
-import { NavLink, useNavigate } from "react-router-dom";
+import { Clapperboard, LogOut, Search, Send } from "lucide-react";
 import { useDispatch, useSelector } from "react-redux";
+import { NavLink, useLocation, useNavigate } from "react-router-dom";
 import { logout } from "../../redux/slices/authSlice";
 import { navigationItems } from "../../utils/constants";
 import { classNames, getPrimaryPhoto } from "../../utils/helpers";
 
 const Sidebar = () => {
+  const location = useLocation();
   const navigate = useNavigate();
   const dispatch = useDispatch();
   const user = useSelector((state) => state.auth.user);
+  const profilePath = user?.username ? `/profile/${user.username}` : "/settings";
+  const resolvedNavigationItems = navigationItems.map((item) =>
+    item.label === "Profile" ? { ...item, path: profilePath } : item,
+  );
+  const mobileNavigation = [
+    { label: "Home", path: "/home", icon: resolvedNavigationItems[0]?.icon },
+    { label: "Discover", path: "/discover", icon: Clapperboard },
+    { label: "Messages", path: "/messages", icon: Send },
+    { label: "Search", path: "/search", icon: Search },
+    { label: "Profile", path: profilePath, icon: null, isProfile: true },
+  ];
 
   const handleLogout = () => {
     dispatch(logout());
@@ -19,7 +31,7 @@ const Sidebar = () => {
   return (
     <>
       <aside className="hidden lg:block">
-        <div className="sticky top-4">
+        <div className="spark-scrollbar sticky top-4 max-h-[calc(100vh-2rem)] overflow-y-auto pr-1">
           <div className="glass-panel p-5">
             <div className="flex items-center gap-3">
               <img
@@ -33,7 +45,7 @@ const Sidebar = () => {
               </div>
             </div>
             <nav className="mt-6 space-y-2">
-              {navigationItems.map((item) => {
+              {resolvedNavigationItems.map((item) => {
                 const Icon = item.icon;
 
                 return (
@@ -69,27 +81,51 @@ const Sidebar = () => {
       <motion.nav
         initial={{ y: 40, opacity: 0 }}
         animate={{ y: 0, opacity: 1 }}
-        className="glass-panel fixed inset-x-3 bottom-3 z-30 flex items-center justify-between px-2 py-2 lg:hidden"
+        className="fixed inset-x-0 bottom-0 z-30 border-t border-white/10 bg-black/95 px-4 pt-2 backdrop-blur-xl lg:hidden"
+        style={{ paddingBottom: "calc(env(safe-area-inset-bottom, 0px) + 12px)" }}
       >
-        {navigationItems.slice(0, 5).map((item) => {
-          const Icon = item.icon;
+        <div className="mx-auto flex w-full max-w-md items-center justify-between">
+          {mobileNavigation.map((item) => {
+            const isActive =
+              item.isProfile && location.pathname.startsWith("/profile/")
+                ? true
+                : location.pathname === item.path;
+            const Icon = item.icon;
 
-          return (
-            <NavLink
-              key={item.path}
-              to={item.path}
-              className={({ isActive }) =>
-                classNames(
-                  "flex flex-1 flex-col items-center gap-1 rounded-2xl px-2 py-2 text-[11px] transition",
-                  isActive ? "bg-white/[0.12] text-white" : "text-white/[0.55]",
-                )
-              }
-            >
-              <Icon size={18} />
-              {item.label}
-            </NavLink>
-          );
-        })}
+            return (
+              <NavLink
+                key={item.path}
+                to={item.path}
+                className="relative flex h-12 w-12 items-center justify-center rounded-full text-white transition"
+                aria-label={item.label}
+              >
+                {item.isProfile ? (
+                  <div
+                    className={classNames(
+                      "relative rounded-full p-[2px] transition",
+                      isActive
+                        ? "bg-[linear-gradient(135deg,#f9ce34_0%,#ee2a7b_52%,#6228d7_100%)]"
+                        : "bg-white/20",
+                    )}
+                  >
+                    <img
+                      src={getPrimaryPhoto(user)}
+                      alt={user?.name || "Profile"}
+                      className="h-8 w-8 rounded-full border-2 border-black object-cover"
+                    />
+                    <span className="absolute -bottom-0.5 -right-0.5 h-2.5 w-2.5 rounded-full border border-black bg-red-500" />
+                  </div>
+                ) : (
+                  <Icon
+                    size={isActive ? 24 : 22}
+                    strokeWidth={isActive ? 2.35 : 2}
+                    className={isActive ? "text-white" : "text-white/70"}
+                  />
+                )}
+              </NavLink>
+            );
+          })}
+        </div>
       </motion.nav>
     </>
   );

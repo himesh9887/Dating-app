@@ -19,7 +19,7 @@ export const navigationItems = [
   { label: "Notifications", path: "/notifications", icon: Bell },
   { label: "Search", path: "/search", icon: Search },
   { label: "Create", path: "/create", icon: PlusSquare },
-  { label: "Profile", path: "/profile/novalane", icon: UserRound },
+  { label: "Profile", path: "/profile/:username", icon: UserRound },
   { label: "Settings", path: "/settings", icon: Settings },
 ];
 

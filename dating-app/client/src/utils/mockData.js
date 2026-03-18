@@ -355,3 +355,259 @@ export const demoSearchResults = [
     location: { label: "Whitefield" },
   },
 ];
+
+export const demoReels = [
+  {
+    _id: "reel-1",
+    author: {
+      _id: "reel-u1",
+      username: "adhuri_mohobat_goan_ki",
+      name: "Adhuri Mohobat",
+      profilePhotos: [
+        {
+          url: "https://images.unsplash.com/photo-1500648767791-00dcc994a43e?auto=format&fit=crop&w=900&q=80",
+        },
+      ],
+    },
+    media: {
+      url: "https://images.unsplash.com/photo-1519608487953-e999c86e7455?auto=format&fit=crop&w=1200&q=80",
+      type: "image",
+    },
+    caption: "दिखावे का प्यार मत रखना बहन...🥺🙏",
+    audio: "lyon Is Back (Instrumental)",
+    likes: 15200,
+    comments: 17,
+    remixes: 678,
+    shares: 1290,
+  },
+  {
+    _id: "reel-2",
+    author: {
+      _id: "reel-u2",
+      username: "codewithsana",
+      name: "Code With Sana",
+      profilePhotos: [
+        {
+          url: "https://images.unsplash.com/photo-1544005313-94ddf0286df2?auto=format&fit=crop&w=900&q=80",
+        },
+      ],
+    },
+    media: {
+      url: "https://images.unsplash.com/photo-1515879218367-8466d910aaa4?auto=format&fit=crop&w=1200&q=80",
+      type: "image",
+    },
+    caption: "Laptop, coffee, aur ek aur late-night deploy.",
+    audio: "Original audio",
+    likes: 470000,
+    comments: 1096,
+    remixes: 357000,
+    shares: 2200,
+  },
+  {
+    _id: "reel-3",
+    author: {
+      _id: "reel-u3",
+      username: "streetframes.in",
+      name: "Street Frames",
+      profilePhotos: [
+        {
+          url: "https://images.unsplash.com/photo-1494790108377-be9c29b29330?auto=format&fit=crop&w=900&q=80",
+        },
+      ],
+    },
+    media: {
+      url: "https://images.unsplash.com/photo-1524504388940-b1c1722653e1?auto=format&fit=crop&w=1200&q=80",
+      type: "image",
+    },
+    caption: "Golden hour portraits hit different.",
+    audio: "Darshan Vibes",
+    likes: 82600,
+    comments: 442,
+    remixes: 129,
+    shares: 1840,
+  },
+];
+
+export const demoExploreTiles = [
+  {
+    _id: "explore-1",
+    image:
+      "https://images.unsplash.com/photo-1515879218367-8466d910aaa4?auto=format&fit=crop&w=900&q=80",
+    views: "1,572",
+    rows: 20,
+    title: "Code mood",
+  },
+  {
+    _id: "explore-2",
+    image:
+      "https://images.unsplash.com/photo-1494790108755-2616b612b786?auto=format&fit=crop&w=900&q=80",
+    views: "470K",
+    rows: 24,
+    title: "How it happens",
+  },
+  {
+    _id: "explore-3",
+    image:
+      "https://images.unsplash.com/photo-1488426862026-3ee34a7d66df?auto=format&fit=crop&w=900&q=80",
+    views: "82.6K",
+    rows: 24,
+    title: "Soft smile",
+  },
+  {
+    _id: "explore-4",
+    image:
+      "https://images.unsplash.com/photo-1500530855697-b586d89ba3ee?auto=format&fit=crop&w=900&q=80",
+    views: "4.3M",
+    rows: 26,
+    title: "Party fit",
+  },
+  {
+    _id: "explore-5",
+    image:
+      "https://images.unsplash.com/photo-1517841905240-472988babdf9?auto=format&fit=crop&w=900&q=80",
+    views: "1,096",
+    rows: 24,
+    title: "Casual clip",
+  },
+  {
+    _id: "explore-6",
+    image:
+      "https://images.unsplash.com/photo-1506794778202-cad84cf45f1d?auto=format&fit=crop&w=900&q=80",
+    views: "357K",
+    rows: 24,
+    title: "Phone trick",
+  },
+  {
+    _id: "explore-7",
+    image:
+      "https://images.unsplash.com/photo-1544005313-94ddf0286df2?auto=format&fit=crop&w=900&q=80",
+    views: "109K",
+    rows: 22,
+    title: "Close-up",
+  },
+  {
+    _id: "explore-8",
+    image:
+      "https://images.unsplash.com/photo-1524504388940-b1c1722653e1?auto=format&fit=crop&w=900&q=80",
+    views: "50.7K",
+    rows: 22,
+    title: "Denim fit",
+  },
+  {
+    _id: "explore-9",
+    image:
+      "https://images.unsplash.com/photo-1500648767791-00dcc994a43e?auto=format&fit=crop&w=900&q=80",
+    views: "17.7M",
+    rows: 22,
+    title: "Trend cut",
+  },
+  {
+    _id: "explore-10",
+    image:
+      "https://images.unsplash.com/photo-1516321318423-f06f85e504b3?auto=format&fit=crop&w=900&q=80",
+    views: "352K",
+    rows: 22,
+    title: "Glass effect",
+  },
+  {
+    _id: "explore-11",
+    image:
+      "https://images.unsplash.com/photo-1518770660439-4636190af475?auto=format&fit=crop&w=900&q=80",
+    views: "2.2M",
+    rows: 22,
+    title: "Fingerprint unlock",
+  },
+  {
+    _id: "explore-12",
+    image:
+      "https://images.unsplash.com/photo-1519389950473-47ba0277781c?auto=format&fit=crop&w=900&q=80",
+    views: "4.1M",
+    rows: 22,
+    title: "Tech loop",
+  },
+];
+
+export const demoProfileHighlights = [
+  {
+    _id: "highlight-1",
+    title: "New",
+    image: "",
+    isAdd: true,
+  },
+  {
+    _id: "highlight-2",
+    title: "birthday wish...",
+    image:
+      "https://images.unsplash.com/photo-1511988617509-a57c8a288659?auto=format&fit=crop&w=900&q=80",
+  },
+  {
+    _id: "highlight-3",
+    title: "yaar",
+    image:
+      "https://images.unsplash.com/photo-1500534623283-312aade485b7?auto=format&fit=crop&w=900&q=80",
+  },
+  {
+    _id: "highlight-4",
+    title: "jindagi",
+    image:
+      "https://images.unsplash.com/photo-1500530855697-b586d89ba3ee?auto=format&fit=crop&w=900&q=80",
+  },
+];
+
+export const demoProfileGrid = [
+  {
+    _id: "profile-grid-1",
+    image:
+      "https://images.unsplash.com/photo-1500648767791-00dcc994a43e?auto=format&fit=crop&w=900&q=80",
+    views: 645,
+  },
+  {
+    _id: "profile-grid-2",
+    image:
+      "https://images.unsplash.com/photo-1506794778202-cad84cf45f1d?auto=format&fit=crop&w=900&q=80",
+    views: 442,
+    pinned: true,
+  },
+  {
+    _id: "profile-grid-3",
+    image:
+      "https://images.unsplash.com/photo-1517841905240-472988babdf9?auto=format&fit=crop&w=900&q=80",
+    views: 262,
+  },
+  {
+    _id: "profile-grid-4",
+    image:
+      "https://images.unsplash.com/photo-1494790108377-be9c29b29330?auto=format&fit=crop&w=900&q=80",
+    views: 508,
+  },
+  {
+    _id: "profile-grid-5",
+    image:
+      "https://images.unsplash.com/photo-1524504388940-b1c1722653e1?auto=format&fit=crop&w=900&q=80",
+    views: 721,
+  },
+  {
+    _id: "profile-grid-6",
+    image:
+      "https://images.unsplash.com/photo-1544005313-94ddf0286df2?auto=format&fit=crop&w=900&q=80",
+    views: 198,
+  },
+  {
+    _id: "profile-grid-7",
+    image:
+      "https://images.unsplash.com/photo-1488426862026-3ee34a7d66df?auto=format&fit=crop&w=900&q=80",
+    views: 304,
+  },
+  {
+    _id: "profile-grid-8",
+    image:
+      "https://images.unsplash.com/photo-1515886657613-9f3515b0c78f?auto=format&fit=crop&w=900&q=80",
+    views: 865,
+  },
+  {
+    _id: "profile-grid-9",
+    image:
+      "https://images.unsplash.com/photo-1494790108755-2616b612b786?auto=format&fit=crop&w=900&q=80",
+    views: 543,
+  },
+];

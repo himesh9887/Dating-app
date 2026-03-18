@@ -10,7 +10,7 @@ const AuthLayout = () => (
       <motion.div
         initial={{ opacity: 0, y: 24 }}
         animate={{ opacity: 1, y: 0 }}
-        className="glass-panel hidden p-10 lg:flex lg:flex-col lg:justify-between"
+        className="glass-panel hidden p-6 md:flex md:flex-col md:justify-between lg:p-10"
       >
         <div>
           <span className="inline-flex rounded-full border border-white/10 bg-white/5 px-4 py-2 text-xs font-semibold uppercase tracking-[0.3em] text-white/70">

@@ -1,4 +1,4 @@
-@import url("https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&family=Poppins:wght@500;600;700;800&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Grand+Hotel&family=Manrope:wght@400;500;600;700;800&family=Poppins:wght@500;600;700;800&display=swap");
 
 @tailwind base;
 @tailwind components;
@@ -53,6 +53,10 @@
 
   .spark-button-ghost {
     @apply inline-flex items-center justify-center rounded-2xl border border-white/10 bg-white/5 px-4 py-3 text-sm font-semibold text-white transition hover:bg-white/10;
+  }
+
+  .instagram-icon-button {
+    @apply inline-flex h-11 w-11 items-center justify-center rounded-full text-white transition hover:bg-white/10 active:scale-95;
   }
 }
 

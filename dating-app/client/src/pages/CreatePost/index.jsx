@@ -1,4 +1,4 @@
-import { ImagePlus, Hash, WandSparkles } from "lucide-react";
+import { Hash, ImagePlus, WandSparkles } from "lucide-react";
 import { useState } from "react";
 import { useDispatch } from "react-redux";
 import { useNavigate } from "react-router-dom";
@@ -15,15 +15,19 @@ const CreatePostPage = () => {
   const [file, setFile] = useState(null);
 
   return (
-    <div className="glass-panel p-5">
+    <div className="glass-panel p-5 lg:p-6">
       <SectionHeader
         title="Create Post"
         subtitle="Upload an image, add a caption, and preview before sharing."
       />
-      <div className="grid gap-5 xl:grid-cols-[0.9fr_1.1fr]">
-        <div className="glass-soft flex min-h-[420px] items-center justify-center p-5">
+      <div className="grid gap-5 lg:grid-cols-[minmax(320px,0.95fr)_minmax(0,1.05fr)]">
+        <div className="glass-soft flex min-h-[360px] items-center justify-center p-5 lg:min-h-[520px]">
           {preview ? (
-            <img src={preview} alt="Preview" className="h-full w-full rounded-[28px] object-cover" />
+            <img
+              src={preview}
+              alt="Preview"
+              className="h-full w-full rounded-[28px] object-cover"
+            />
           ) : (
             <div className="text-center text-white/50">
               <ImagePlus className="mx-auto mb-3" size={32} />
@@ -61,7 +65,7 @@ const CreatePostPage = () => {
             />
           </label>
           <textarea
-            className="spark-input min-h-36"
+            className="spark-input min-h-40"
             placeholder="Tell your feed what this moment feels like..."
             value={caption}
             onChange={(event) => setCaption(event.target.value)}
@@ -82,7 +86,10 @@ const CreatePostPage = () => {
             </div>
             Rounded media card, caption overlay, hashtags, likes, and comment-ready layout.
           </div>
-          <button type="submit" className="spark-button">
+          <button
+            type="submit"
+            className="spark-button w-full lg:w-auto"
+          >
             Share post
           </button>
         </form>
@@ -92,4 +99,3 @@ const CreatePostPage = () => {
 };
 
 export default CreatePostPage;
-

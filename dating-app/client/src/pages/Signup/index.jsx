@@ -33,14 +33,20 @@ const SignupPage = () => {
 
   const handleSubmit = async (event) => {
     event.preventDefault();
-    await dispatch(signupUser(form)).unwrap();
-    navigate("/home");
+    try {
+      await dispatch(signupUser(form)).unwrap();
+      navigate("/home");
+    } catch (_error) {
+      // Errors are surfaced via Redux state.
+    }
   };
 
   return (
     <motion.div initial={{ opacity: 0, y: 18 }} animate={{ opacity: 1, y: 0 }}>
       <p className="text-xs uppercase tracking-[0.3em] text-white/40">Start your era</p>
-      <h2 className="mt-3 font-display text-4xl font-semibold">Create your Spark profile</h2>
+      <h2 className="mt-3 font-display text-3xl font-semibold sm:text-4xl">
+        Create your Spark profile
+      </h2>
       <form onSubmit={handleSubmit} className="mt-8 space-y-4">
         <div className="grid gap-4 sm:grid-cols-2">
           <input className="spark-input" placeholder="Name" value={form.name} onChange={(event) => setForm((current) => ({ ...current, name: event.target.value }))} />
