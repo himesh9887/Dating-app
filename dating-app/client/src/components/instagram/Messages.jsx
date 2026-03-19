@@ -42,22 +42,22 @@ const getConversationPreview = (conversation) =>
 const NoteCard = ({ item }) => (
   <div className="w-[94px] shrink-0 text-center">
     <div className="relative mx-auto flex w-full justify-center pt-10">
-      <div className="absolute left-0 top-0 max-w-[88px] rounded-[22px] bg-[#23262d] px-3 py-2 text-left text-[0.95rem] leading-5 text-white/70 shadow-[0_10px_25px_rgba(0,0,0,0.35)]">
+      <div className="absolute left-1 top-0 max-w-[86px] rounded-[20px] bg-[#23262d] px-3 py-2 text-left text-[13px] leading-4 text-white/70 shadow-[0_10px_25px_rgba(0,0,0,0.35)]">
         {item.note}
       </div>
       <div className="relative">
         <img
           src={item.image}
           alt={item.title}
-          className="h-[76px] w-[76px] rounded-full border border-[#262626] object-cover"
+          className="h-[72px] w-[72px] rounded-full border border-[#262626] object-cover"
         />
         {item.hasBadge ? (
-          <span className="absolute -right-1 top-0 h-4 w-4 rounded-full border-2 border-black bg-pink-500" />
+          <span className="absolute -right-1 top-0 h-[14px] w-[14px] rounded-full border-2 border-black bg-pink-500" />
         ) : null}
       </div>
     </div>
-    <p className="mt-3 truncate text-[0.98rem] text-white">{item.title}</p>
-    <p className="truncate text-sm text-[#a8a8a8]">{item.subtitle}</p>
+    <p className="mt-3 truncate text-[13px] text-white">{item.title}</p>
+    <p className="truncate text-[12px] text-[#a8a8a8]">{item.subtitle}</p>
   </div>
 );
 
@@ -73,30 +73,30 @@ const ConversationRow = ({ conversation, active, onOpenConversation }) => {
       type="button"
       onClick={() => onOpenConversation(conversation._id)}
       className={classNames(
-        "group flex w-full items-center gap-3 rounded-[22px] px-1 py-3 text-left transition-all duration-300",
-        active ? "bg-white/[0.05]" : "hover:bg-white/[0.03]",
+        "group flex w-full items-center gap-3 border-b border-[#1f1f1f] px-1 py-3 text-left transition-all duration-300",
+        active ? "bg-white/[0.03]" : "hover:bg-white/[0.02]",
       )}
     >
       <div className="relative shrink-0">
         <img
           src={getPrimaryPhoto(conversation.partner)}
           alt={conversation.partner.name}
-          className="h-12 w-12 rounded-full object-cover"
+          className="h-[52px] w-[52px] rounded-full object-cover"
         />
         {conversation.unreadCount ? (
-          <span className="absolute bottom-0 right-0 flex h-4 min-w-4 items-center justify-center rounded-full bg-[#0095f6] px-1 text-[10px] font-semibold text-white">
+          <span className="absolute bottom-0 right-0 flex h-4 min-w-4 items-center justify-center rounded-full bg-[#0095f6] px-1 text-[9px] font-semibold text-white">
             {conversation.unreadCount}
           </span>
         ) : null}
       </div>
 
       <div className="min-w-0 flex-1">
-        <p className="truncate text-sm font-semibold text-white">{displayName}</p>
-        <p className="mt-0.5 truncate text-xs text-[#a8a8a8]">{previewText}</p>
+        <p className="truncate text-[15px] font-medium text-white">{displayName}</p>
+        <p className="mt-0.5 truncate text-[13px] text-[#a8a8a8]">{previewText}</p>
       </div>
 
       <span className="flex h-10 w-10 shrink-0 items-center justify-center rounded-full text-[#a8a8a8] transition-all duration-300 group-hover:bg-white/[0.04]">
-        <Camera size={22} strokeWidth={1.8} />
+        <Camera size={21} strokeWidth={1.8} />
       </span>
     </button>
   );
@@ -203,21 +203,21 @@ const Messages = () => {
 
   return (
     <div className="min-h-screen bg-black px-4 pb-24 pt-3 text-white">
-      <header className="sticky top-0 z-20 -mx-4 mb-5 flex items-center justify-between border-b border-[#262626] bg-black/95 px-4 pb-3 pt-2 backdrop-blur-xl">
+      <header className="sticky top-0 z-20 -mx-4 mb-4 flex items-center justify-between border-b border-[#262626] bg-black/95 px-4 pb-3 pt-2 backdrop-blur-xl">
         <button
           type="button"
           className="instagram-icon-button"
           aria-label="Messages settings"
         >
-          <ListFilter size={30} strokeWidth={1.8} />
+          <ListFilter size={28} strokeWidth={1.8} />
         </button>
 
         <button
           type="button"
-          className="flex items-center gap-2 text-[1.15rem] font-semibold"
+          className="flex items-center gap-2 text-[1.02rem] font-semibold"
         >
           <span>{resolvedUser.username}</span>
-          <ChevronDown size={18} />
+          <ChevronDown size={16} />
         </button>
 
         <div className="flex items-center gap-1">
@@ -226,25 +226,25 @@ const Messages = () => {
             className="instagram-icon-button"
             aria-label="Inbox activity"
           >
-            <TrendingUp size={24} strokeWidth={2.1} />
+            <TrendingUp size={22} strokeWidth={2.1} />
           </button>
           <button
             type="button"
             className="instagram-icon-button"
             aria-label="Compose message"
           >
-            <SquarePen size={24} strokeWidth={2.1} />
+            <SquarePen size={22} strokeWidth={2.1} />
           </button>
         </div>
       </header>
 
       <label className="mb-5 flex items-center gap-3 rounded-full bg-[#262626] px-4 py-2.5 text-[#a8a8a8]">
-        <Search size={18} strokeWidth={2.1} />
+        <Search size={17} strokeWidth={2.1} />
         <input
           value={searchValue}
           onChange={(event) => setSearchValue(event.target.value)}
           placeholder="Search or ask Meta AI"
-          className="w-full bg-transparent text-[1rem] text-white placeholder:text-[#a8a8a8]"
+          className="w-full bg-transparent text-[14px] text-white placeholder:text-[#a8a8a8]"
         />
       </label>
 
@@ -260,7 +260,7 @@ const Messages = () => {
       <div className="spark-scrollbar mb-5 flex gap-3 overflow-x-auto pb-1">
         <button
           type="button"
-          className="flex h-12 shrink-0 items-center gap-2 rounded-full border border-[#262626] px-4 text-white transition-all duration-300 active:scale-95"
+          className="flex h-11 shrink-0 items-center gap-2 rounded-full border border-[#262626] px-4 text-white transition-all duration-300 active:scale-95"
         >
           <SlidersHorizontal size={18} strokeWidth={2.1} />
           <ChevronDown size={16} />
@@ -272,7 +272,7 @@ const Messages = () => {
             type="button"
             onClick={() => setActiveFilter(tab.key)}
             className={classNames(
-              "h-12 shrink-0 rounded-full border px-6 text-[1.02rem] font-medium transition-all duration-300 active:scale-95",
+              "h-11 shrink-0 rounded-full border px-5 text-[15px] font-medium transition-all duration-300 active:scale-95",
               activeFilter === tab.key
                 ? "border-transparent bg-[#2d323a] text-white"
                 : "border-[#262626] text-white/80",

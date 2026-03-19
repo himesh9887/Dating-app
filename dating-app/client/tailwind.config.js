@@ -29,7 +29,7 @@ export default {
       fontFamily: {
         display: ["system-ui", "ui-sans-serif", "sans-serif"],
         body: ["system-ui", "ui-sans-serif", "sans-serif"],
-        logo: ["system-ui", "ui-sans-serif", "sans-serif"],
+        logo: ["Grand Hotel", "cursive"],
       },
       animation: {
         float: "float 6s ease-in-out infinite",

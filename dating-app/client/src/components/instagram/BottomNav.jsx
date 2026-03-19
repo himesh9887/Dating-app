@@ -22,8 +22,8 @@ const BottomNav = () => {
 
   return (
     <nav
-      className="fixed bottom-0 left-1/2 z-40 w-full max-w-md -translate-x-1/2 border-t border-[#262626] bg-black/95 px-2 py-2 backdrop-blur-xl"
-      style={{ paddingBottom: "calc(env(safe-area-inset-bottom, 0px) + 8px)" }}
+      className="fixed bottom-0 left-1/2 z-40 w-full max-w-md -translate-x-1/2 border-t border-[#262626] bg-black/95 px-2 py-1.5 backdrop-blur-xl"
+      style={{ paddingBottom: "calc(env(safe-area-inset-bottom, 0px) + 6px)" }}
     >
       <div className="flex items-center justify-around">
         {items.map((item) => {
@@ -38,7 +38,7 @@ const BottomNav = () => {
             <NavLink
               key={item.key}
               to={item.path}
-              className="flex h-11 w-11 items-center justify-center rounded-full text-white transition-all duration-300 active:scale-95"
+              className="flex h-10 w-10 items-center justify-center rounded-full text-white transition-all duration-300 active:scale-95"
               aria-label={item.label}
             >
               {item.isProfile ? (
@@ -53,12 +53,12 @@ const BottomNav = () => {
                   <img
                     src={getPrimaryPhoto(user)}
                     alt={user?.name || "Profile"}
-                    className="h-7 w-7 rounded-full border-2 border-black object-cover"
+                    className="h-[26px] w-[26px] rounded-full border-2 border-black object-cover"
                   />
                 </div>
               ) : (
                 <Icon
-                  size={active ? 26 : 24}
+                  size={active ? 24 : 22}
                   strokeWidth={active ? 2.4 : 2}
                   className={classNames(active ? "text-white" : "text-[#a8a8a8]")}
                 />

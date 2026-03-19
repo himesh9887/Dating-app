@@ -31,15 +31,15 @@ const Navbar = () => {
       <header className="fixed left-1/2 top-0 z-40 flex h-[60px] w-full max-w-md -translate-x-1/2 items-center justify-between border-b border-[#262626] bg-black/95 px-4 backdrop-blur-xl">
         <Link
           to="/create"
-          className="instagram-icon-button"
+          className="instagram-icon-button h-9 w-9"
           aria-label="Create post"
         >
-          <Plus size={26} strokeWidth={2.1} />
+          <Plus size={25} strokeWidth={2.1} />
         </Link>
 
         <Link
           to="/home"
-          className="text-[1.55rem] font-semibold tracking-[-0.03em] text-white"
+          className="font-logo text-[2.45rem] leading-none text-white"
         >
           Instagram
         </Link>
@@ -47,17 +47,17 @@ const Navbar = () => {
         <div className="flex items-center gap-1">
           <Link
             to="/notifications"
-            className="instagram-icon-button"
+            className="instagram-icon-button h-9 w-9"
             aria-label="Activity"
           >
-            <Heart size={24} strokeWidth={2} />
+            <Heart size={23} strokeWidth={2} />
           </Link>
           <Link
             to="/messages"
-            className="instagram-icon-button"
+            className="instagram-icon-button h-9 w-9"
             aria-label="Messages"
           >
-            <MessageCircle size={24} strokeWidth={2} />
+            <MessageCircle size={23} strokeWidth={2} />
           </Link>
         </div>
       </header>
@@ -66,16 +66,16 @@ const Navbar = () => {
 
   return (
     <header className="fixed left-1/2 top-0 z-40 flex h-[60px] w-full max-w-md -translate-x-1/2 items-center justify-between border-b border-[#262626] bg-black/95 px-4 backdrop-blur-xl">
-      <h1 className="text-[1.05rem] font-semibold text-white">
+      <h1 className="text-[1rem] font-semibold text-white">
         {pageTitles[pathname] || "Instagram"}
       </h1>
       <div className="flex items-center gap-1">
         <Link
           to="/notifications"
-          className="instagram-icon-button"
+          className="instagram-icon-button h-9 w-9"
           aria-label="Activity"
         >
-          <Heart size={22} strokeWidth={2} />
+          <Heart size={21} strokeWidth={2} />
         </Link>
       </div>
     </header>

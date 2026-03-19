@@ -34,7 +34,7 @@ const ChatBox = ({ conversation, onBack, isMobileDetail = false }) => {
         )}
       >
         {isMobileDetail ? (
-          <div className="sticky top-0 z-20 flex items-center gap-3 border-b border-white/10 bg-black/95 px-4 pb-4 pt-3 backdrop-blur-xl">
+          <div className="sticky top-0 z-20 flex items-center gap-3 border-b border-[#262626] bg-black/95 px-4 pb-3 pt-2 backdrop-blur-xl">
             {onBack ? (
               <button
                 type="button"
@@ -42,10 +42,10 @@ const ChatBox = ({ conversation, onBack, isMobileDetail = false }) => {
                 className="instagram-icon-button"
                 aria-label="Back to inbox"
               >
-                <ArrowLeft size={28} strokeWidth={2.1} />
+                <ArrowLeft size={24} strokeWidth={2.1} />
               </button>
             ) : null}
-            <p className="text-[1.05rem] font-semibold text-white">Chat</p>
+            <p className="text-[16px] font-semibold text-white">Chat</p>
           </div>
         ) : null}
 
@@ -106,10 +106,10 @@ const ChatBox = ({ conversation, onBack, isMobileDetail = false }) => {
     >
       <div
         className={classNames(
-          "flex items-center gap-3 border-b border-white/10",
+          "flex items-center gap-3 border-b border-[#262626]",
           isMobileDetail
-            ? "sticky top-0 z-20 bg-black/95 px-4 pb-4 pt-3 backdrop-blur-xl"
-            : "px-5 py-4",
+            ? "sticky top-0 z-20 bg-black/95 px-4 pb-3 pt-2 backdrop-blur-xl"
+            : "px-4 py-3",
         )}
       >
         {onBack ? (
@@ -119,21 +119,21 @@ const ChatBox = ({ conversation, onBack, isMobileDetail = false }) => {
             className="instagram-icon-button"
             aria-label="Back to inbox"
           >
-            <ArrowLeft size={28} strokeWidth={2.1} />
+            <ArrowLeft size={24} strokeWidth={2.1} />
           </button>
         ) : null}
 
         <img
           src={getPrimaryPhoto(conversation.partner)}
           alt={conversation.partner.name}
-          className="h-11 w-11 rounded-full border border-white/10 object-cover"
+          className="h-10 w-10 rounded-full border border-[#262626] object-cover"
         />
 
         <div className="min-w-0 flex-1">
-          <h3 className="truncate text-[1.02rem] font-semibold">
+          <h3 className="truncate text-[15px] font-semibold">
             {conversation.partner.username || conversation.partner.name}
           </h3>
-          <p className="text-sm text-white/50">
+          <p className="text-[12px] text-white/50">
             {typingState?.isTyping ? "typing..." : `@${conversation.partner.username || "chat"}`}
           </p>
         </div>
@@ -144,19 +144,19 @@ const ChatBox = ({ conversation, onBack, isMobileDetail = false }) => {
             className="instagram-icon-button h-10 w-10 text-white/80"
             aria-label="Voice call"
           >
-            <Phone size={20} strokeWidth={2.1} />
+            <Phone size={18} strokeWidth={2.1} />
           </button>
           <button
             type="button"
             className="instagram-icon-button h-10 w-10 text-white/80"
             aria-label="Conversation info"
           >
-            <Info size={20} strokeWidth={2.1} />
+            <Info size={18} strokeWidth={2.1} />
           </button>
         </div>
       </div>
 
-      <div className="spark-scrollbar flex-1 space-y-3 overflow-y-auto bg-[radial-gradient(circle_at_top,_rgba(255,255,255,0.05),_rgba(0,0,0,0)_45%)] px-4 py-5 sm:px-5">
+      <div className="spark-scrollbar flex-1 space-y-3 overflow-y-auto bg-[radial-gradient(circle_at_top,_rgba(255,255,255,0.05),_rgba(0,0,0,0)_45%)] px-4 py-4">
         {messages.length ? (
           messages.map((message) => {
             const own = message.senderId === resolvedUser._id;
@@ -168,12 +168,12 @@ const ChatBox = ({ conversation, onBack, isMobileDetail = false }) => {
               >
                 <div
                   className={classNames(
-                    "max-w-[85%] rounded-[26px] px-4 py-3 text-[0.97rem] sm:max-w-[78%]",
+                    "max-w-[84%] rounded-[22px] px-4 py-2.5 text-[14px] leading-5 sm:max-w-[78%]",
                     own ? "bg-[#3797f0] text-white" : "bg-[#23262d] text-white/90",
                   )}
                 >
                   <p>{message.message}</p>
-                  <p className="mt-2 text-[11px] uppercase tracking-[0.18em] text-white/45">
+                  <p className="mt-1.5 text-[10px] uppercase tracking-[0.08em] text-white/45">
                     {formatTimeAgo(message.createdAt)}
                   </p>
                 </div>
@@ -194,35 +194,35 @@ const ChatBox = ({ conversation, onBack, isMobileDetail = false }) => {
 
       <form
         onSubmit={handleSubmit}
-        className="border-t border-white/10 bg-black/95 p-4 backdrop-blur-xl"
+        className="border-t border-[#262626] bg-black/95 p-3 backdrop-blur-xl"
       >
-        <div className="flex items-center gap-2 rounded-full border border-white/10 bg-[#15181e] px-2 py-2">
+        <div className="flex items-center gap-1 rounded-full border border-[#262626] bg-[#15181e] px-2 py-1.5">
           <button
             type="button"
             className="flex h-10 w-10 items-center justify-center rounded-full text-white/70 transition hover:bg-white/[0.06] hover:text-white"
             aria-label="Open emoji picker"
           >
-            <SmilePlus size={18} />
+            <SmilePlus size={17} />
           </button>
           <button
             type="button"
             className="flex h-10 w-10 items-center justify-center rounded-full text-white/70 transition hover:bg-white/[0.06] hover:text-white"
             aria-label="Attach media"
           >
-            <ImagePlus size={18} />
+            <ImagePlus size={17} />
           </button>
           <input
             value={text}
             onChange={(event) => handleTyping(event.target.value)}
             placeholder="Message..."
-            className="min-w-0 flex-1 bg-transparent px-2 text-[0.98rem] text-white placeholder:text-white/40"
+            className="min-w-0 flex-1 bg-transparent px-2 text-[14px] text-white placeholder:text-white/40"
           />
           <button
             type="submit"
-            className="flex h-10 w-10 items-center justify-center rounded-full bg-[#3797f0] text-white transition hover:brightness-110"
+            className="flex h-9 w-9 items-center justify-center rounded-full bg-[#3797f0] text-white transition hover:brightness-110"
             aria-label="Send message"
           >
-            <SendHorizontal size={16} />
+            <SendHorizontal size={15} />
           </button>
         </div>
       </form>

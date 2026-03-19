@@ -72,12 +72,12 @@ const Profile = ({ user, resolvedUsername, isOwnProfile }) => {
           className="instagram-icon-button"
           aria-label="Add profile content"
         >
-          <Plus size={28} strokeWidth={2} />
+          <Plus size={25} strokeWidth={2} />
         </button>
 
         <button
           type="button"
-          className="flex items-center gap-2 text-[1.1rem] font-semibold"
+          className="flex items-center gap-2 text-[1rem] font-semibold"
         >
           <span>{profileHandle}</span>
           <ChevronDown size={18} />
@@ -88,17 +88,17 @@ const Profile = ({ user, resolvedUsername, isOwnProfile }) => {
           className="instagram-icon-button"
           aria-label="Profile menu"
         >
-          <Menu size={28} strokeWidth={2} />
+          <Menu size={25} strokeWidth={2} />
         </button>
       </header>
 
       <section className="px-4 py-4">
-        <div className="flex items-center gap-5">
+        <div className="flex items-center gap-6">
           <div className="relative shrink-0">
             <img
               src={getPrimaryPhoto(user)}
               alt={displayName}
-              className="h-20 w-20 rounded-full object-cover"
+              className="h-[78px] w-[78px] rounded-full object-cover"
             />
             <span className="absolute bottom-0 right-0 flex h-6 w-6 items-center justify-center rounded-full border-2 border-black bg-white text-black">
               <Plus size={13} strokeWidth={3} />
@@ -108,27 +108,27 @@ const Profile = ({ user, resolvedUsername, isOwnProfile }) => {
           <div className="flex w-full justify-between text-center">
             {profileStats.map((item) => (
               <div key={item.label}>
-                <p className="text-lg font-semibold text-white">{item.value}</p>
-                <p className="text-sm text-white">{item.label}</p>
+                <p className="text-[17px] font-semibold leading-none text-white">{item.value}</p>
+                <p className="mt-1 text-[13px] text-white">{item.label}</p>
               </div>
             ))}
           </div>
         </div>
 
         <div className="pt-4">
-          <p className="font-semibold text-white">{displayName}</p>
-          <p className="text-sm text-[#a8a8a8]">Education</p>
-          <div className="mt-2 space-y-1 text-sm text-white">
+          <p className="text-[14px] font-semibold text-white">{displayName}</p>
+          <p className="text-[13px] text-[#a8a8a8]">Education</p>
+          <div className="mt-2 space-y-1 text-[14px] leading-5 text-white">
             {bioLines.map((line) => (
               <p key={line}>&bull; {line}</p>
             ))}
           </div>
-          <p className="mt-2 inline-flex items-center gap-2 text-sm text-[#e0f1ff]">
-            <Link2 size={15} />
+          <p className="mt-2 inline-flex items-center gap-2 text-[14px] text-[#e0f1ff]">
+            <Link2 size={14} />
             {resolveProfileLink(user)}
           </p>
-          <p className="mt-2 inline-flex items-center gap-2 text-sm font-semibold text-white">
-            <AtSign size={15} />
+          <p className="mt-2 inline-flex items-center gap-2 text-[14px] font-semibold text-white">
+            <AtSign size={14} />
             {profileHandle}
           </p>
         </div>
@@ -138,7 +138,7 @@ const Profile = ({ user, resolvedUsername, isOwnProfile }) => {
             <button
               key={label}
               type="button"
-              className="flex-1 rounded-md border border-[#4b4b4b] py-1.5 text-sm font-semibold text-white transition-all duration-300 hover:scale-105 active:scale-95"
+              className="flex-1 rounded-md border border-[#4b4b4b] py-1.5 text-[14px] font-semibold text-white transition-all duration-300 hover:scale-[1.02] active:scale-95"
             >
               {label}
             </button>
@@ -149,22 +149,22 @@ const Profile = ({ user, resolvedUsername, isOwnProfile }) => {
           {demoProfileHighlights.map((item) => (
             <div
               key={item._id}
-              className="w-16 shrink-0 text-center"
+              className="w-[68px] shrink-0 text-center"
             >
               {item.isAdd ? (
-                <div className="flex h-16 w-16 items-center justify-center rounded-full border border-[#4b4b4b]">
-                  <Plus size={24} />
+                <div className="flex h-[64px] w-[64px] items-center justify-center rounded-full border border-[#4b4b4b]">
+                  <Plus size={22} />
                 </div>
               ) : (
                 <div className="rounded-full border border-[#262626] p-[2px]">
                   <img
                     src={item.image}
                     alt={item.title}
-                    className="h-[58px] w-[58px] rounded-full object-cover"
+                    className="h-[60px] w-[60px] rounded-full object-cover"
                   />
                 </div>
               )}
-              <p className="mt-1 truncate text-xs text-white">{item.title}</p>
+              <p className="mt-1 truncate text-[11px] text-white">{item.title}</p>
             </div>
           ))}
         </div>
@@ -184,7 +184,7 @@ const Profile = ({ user, resolvedUsername, isOwnProfile }) => {
                 }`}
                 aria-label={item.key}
               >
-                <Icon size={22} strokeWidth={1.9} />
+                <Icon size={20} strokeWidth={1.9} />
                 {item.active ? (
                   <span className="absolute inset-x-5 bottom-0 h-0.5 bg-white" />
                 ) : null}
@@ -207,13 +207,13 @@ const Profile = ({ user, resolvedUsername, isOwnProfile }) => {
             />
             {item.pinned ? (
               <Pin
-                size={16}
+                size={15}
                 className="absolute right-2 top-2 fill-current text-white"
               />
             ) : null}
             <div className="absolute bottom-2 left-2 flex items-center gap-1 text-white">
-              <Play size={13} className="fill-current" />
-              <span className="text-[11px] font-semibold">{formatCompactNumber(item.views)}</span>
+              <Play size={12} className="fill-current" />
+              <span className="text-[10px] font-semibold">{formatCompactNumber(item.views)}</span>
             </div>
           </article>
         ))}

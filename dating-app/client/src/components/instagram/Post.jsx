@@ -43,16 +43,16 @@ const Post = ({ post }) => {
       initial={{ opacity: 0, y: 18 }}
       whileInView={{ opacity: 1, y: 0 }}
       viewport={{ once: true, amount: 0.2 }}
-      className="mb-6 bg-black"
+      className="mb-5 border-b border-[#262626] bg-black pb-4"
     >
-      <div className="flex items-center justify-between px-3 py-2">
+      <div className="flex items-center justify-between px-3 py-2.5">
         <div className="flex min-w-0 items-center">
           <img
             src={getPrimaryPhoto(post.author)}
             alt={post.author.name}
             className="h-8 w-8 rounded-full object-cover"
           />
-          <span className="ml-2 truncate text-sm font-semibold text-white">
+          <span className="ml-2 truncate text-[13px] font-semibold text-white">
             {post.author.username}
           </span>
         </div>
@@ -61,7 +61,7 @@ const Post = ({ post }) => {
           className="text-white transition-all duration-300 active:scale-95"
           aria-label="More options"
         >
-          <MoreHorizontal size={20} />
+          <MoreHorizontal size={18} />
         </button>
       </div>
 
@@ -73,7 +73,7 @@ const Post = ({ post }) => {
         />
       ) : null}
 
-      <div className="flex items-center justify-between px-3 py-2">
+      <div className="flex items-center justify-between px-3 py-2.5">
         <div className="flex items-center gap-4">
           <button
             type="button"
@@ -82,7 +82,7 @@ const Post = ({ post }) => {
             aria-label="Like post"
           >
             <Heart
-              size={24}
+              size={23}
               className={classNames(isLiked ? "fill-current text-[#ed4956]" : "")}
             />
           </button>
@@ -92,14 +92,14 @@ const Post = ({ post }) => {
             className="text-white transition-all duration-300 hover:scale-105 active:scale-95"
             aria-label="Comment on post"
           >
-            <MessageCircle size={24} />
+            <MessageCircle size={23} />
           </button>
           <button
             type="button"
             className="text-white transition-all duration-300 hover:scale-105 active:scale-95"
             aria-label="Share post"
           >
-            <Send size={24} />
+            <Send size={23} />
           </button>
         </div>
 
@@ -109,15 +109,15 @@ const Post = ({ post }) => {
           className="text-white transition-all duration-300 hover:scale-105 active:scale-95"
           aria-label={saved ? "Remove from saved" : "Save post"}
         >
-          <Bookmark size={24} className={saved ? "fill-current" : ""} />
+          <Bookmark size={23} className={saved ? "fill-current" : ""} />
         </button>
       </div>
 
-      <p className="px-3 text-sm font-semibold text-white">
+      <p className="px-3 text-[13px] font-semibold text-white">
         {displayedLikes} likes
       </p>
 
-      <p className="px-3 pt-1 text-sm text-white">
+      <p className="px-3 pt-1 text-[13px] leading-5 text-white">
         <span className="font-semibold">{post.author.username}</span>{" "}
         <span>{post.caption}</span>
       </p>
@@ -126,13 +126,13 @@ const Post = ({ post }) => {
         <button
           type="button"
           onClick={() => setShowComposer((current) => !current)}
-          className="px-3 pt-1 text-left text-sm text-[#a8a8a8]"
+          className="px-3 pt-1 text-left text-[13px] text-[#a8a8a8]"
         >
           View all {comments.length} comments
         </button>
       ) : null}
 
-      <p className="px-3 pt-1 text-xs uppercase tracking-[0.12em] text-[#a8a8a8]">
+      <p className="px-3 pt-1 text-[10px] uppercase tracking-[0.08em] text-[#a8a8a8]">
         {post.displayAge || formatTimeAgo(post.createdAt)}
       </p>
 
@@ -145,11 +145,11 @@ const Post = ({ post }) => {
             value={comment}
             onChange={(event) => setComment(event.target.value)}
             placeholder="Add a comment..."
-            className="min-w-0 flex-1 border-none bg-transparent p-0 text-sm text-white placeholder:text-[#a8a8a8]"
+            className="min-w-0 flex-1 border-none bg-transparent p-0 text-[13px] text-white placeholder:text-[#a8a8a8]"
           />
           <button
             type="submit"
-            className="text-sm font-semibold text-[#0095f6] transition-all duration-300 active:scale-95"
+            className="text-[13px] font-semibold text-[#0095f6] transition-all duration-300 active:scale-95"
           >
             Post
           </button>
