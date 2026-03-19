@@ -32,7 +32,7 @@ const MatchCard = ({ match }) => (
         </p>
       </div>
       <Link
-        to="/messages"
+        to={`/messages/${match._id}`}
         className="spark-button w-full sm:w-auto"
       >
         <MessageCircleHeart size={16} className="mr-2" />

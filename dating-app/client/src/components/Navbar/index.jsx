@@ -19,10 +19,14 @@ const Navbar = () => {
   const isHomePage = location.pathname === "/home";
   const isDiscoverPage = location.pathname === "/discover";
   const isSearchPage = location.pathname === "/search";
+  const isMessagesPage = location.pathname.startsWith("/messages");
   const isProfilePage = location.pathname.startsWith("/profile/");
-  const hideMobileDefaultHeader = isHomePage || isDiscoverPage || isSearchPage || isProfilePage;
+  const hideMobileDefaultHeader =
+    isHomePage || isDiscoverPage || isSearchPage || isMessagesPage || isProfilePage;
   const title = location.pathname.startsWith("/profile/")
     ? "Profile"
+    : isMessagesPage
+      ? "Messages"
     : pageTitles[location.pathname] || "Spark";
 
   return (

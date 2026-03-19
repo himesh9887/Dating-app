@@ -1,5 +1,3 @@
-@import url("https://fonts.googleapis.com/css2?family=Grand+Hotel&family=Manrope:wght@400;500;600;700;800&family=Poppins:wght@500;600;700;800&display=swap");
-
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
@@ -10,15 +8,20 @@
   }
 
   * {
-    @apply border-spark-line;
+    @apply border-[#262626];
+  }
+
+  html {
+    font-family: system-ui, sans-serif;
+    background: #000000;
   }
 
   body {
-    @apply min-h-screen overflow-x-hidden bg-spark-gradient font-body text-white antialiased;
+    @apply min-h-screen overflow-x-hidden bg-black text-white antialiased;
   }
 
   #root {
-    @apply min-h-screen;
+    @apply min-h-screen bg-black;
   }
 
   button,
@@ -28,35 +31,39 @@
     @apply outline-none;
   }
 
+  a {
+    @apply no-underline;
+  }
+
   ::selection {
-    @apply bg-spark-pink/40 text-white;
+    background: rgba(255, 255, 255, 0.18);
+    color: #ffffff;
   }
 }
 
 @layer components {
   .glass-panel {
-    @apply rounded-[28px] border border-white/10 shadow-panel backdrop-blur-2xl;
-    background-color: rgba(255, 255, 255, 0.08);
+    @apply rounded-[28px] border border-[#262626] bg-[#0f0f0f];
   }
 
   .glass-soft {
-    @apply rounded-3xl border border-white/10 bg-white/5 backdrop-blur-xl;
+    @apply rounded-[24px] border border-[#262626] bg-[#111111];
   }
 
   .spark-input {
-    @apply w-full rounded-2xl border border-white/10 bg-black/20 px-4 py-3 text-sm text-white placeholder:text-white/40 transition focus:border-spark-pink/60 focus:bg-black/30;
+    @apply w-full rounded-2xl border border-[#262626] bg-[#111111] px-4 py-3 text-sm text-white placeholder:text-[#a8a8a8] transition-all duration-300 focus:border-[#3b82f6];
   }
 
   .spark-button {
-    @apply inline-flex items-center justify-center rounded-2xl bg-spark-button px-5 py-3 text-sm font-semibold text-white shadow-glow transition hover:scale-[1.02] active:scale-[0.98];
+    @apply inline-flex items-center justify-center rounded-xl bg-white px-5 py-3 text-sm font-semibold text-black transition-all duration-300 hover:scale-105 active:scale-95;
   }
 
   .spark-button-ghost {
-    @apply inline-flex items-center justify-center rounded-2xl border border-white/10 bg-white/5 px-4 py-3 text-sm font-semibold text-white transition hover:bg-white/10;
+    @apply inline-flex items-center justify-center rounded-xl border border-[#262626] bg-transparent px-4 py-3 text-sm font-semibold text-white transition-all duration-300 hover:bg-white/5 active:scale-95;
   }
 
   .instagram-icon-button {
-    @apply inline-flex h-11 w-11 items-center justify-center rounded-full text-white transition hover:bg-white/10 active:scale-95;
+    @apply inline-flex h-10 w-10 items-center justify-center rounded-full text-white transition-all duration-300 hover:bg-white/5 active:scale-95;
   }
 }
 

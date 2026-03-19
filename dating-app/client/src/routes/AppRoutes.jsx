@@ -58,6 +58,10 @@ export const AppRoutes = () => {
               element={<MessagesPage />}
             />
             <Route
+              path="/messages/:conversationId"
+              element={<MessagesPage />}
+            />
+            <Route
               path="/notifications"
               element={<NotificationsPage />}
             />

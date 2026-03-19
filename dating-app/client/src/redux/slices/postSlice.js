@@ -57,10 +57,13 @@ export const createStory = createAsyncThunk(
 
 export const likePost = createAsyncThunk(
   "posts/likePost",
-  async (postId, { rejectWithValue }) => {
+  async (postId, { getState, rejectWithValue }) => {
     try {
       await postService.likePost(postId);
-      return postId;
+      return {
+        postId,
+        viewerId: getState().auth.user?._id || demoUser._id,
+      };
     } catch (error) {
       return rejectWithValue(normalizeError(error, "Unable to like post"));
     }
@@ -69,10 +72,11 @@ export const likePost = createAsyncThunk(
 
 export const commentPost = createAsyncThunk(
   "posts/commentPost",
-  async ({ postId, comment }, { rejectWithValue }) => {
+  async ({ postId, comment }, { getState, rejectWithValue }) => {
     try {
       await postService.commentOnPost(postId, comment);
-      return { postId, comment };
+      const user = getState().auth.user || demoUser;
+      return { postId, comment, user };
     } catch (error) {
       return rejectWithValue(normalizeError(error, "Unable to comment"));
     }
@@ -118,13 +122,14 @@ const postSlice = createSlice({
         state.feed.unshift(action.payload.post);
       })
       .addCase(likePost.fulfilled, (state, action) => {
-        const post = state.feed.find((item) => item._id === action.payload);
+        const post = state.feed.find((item) => item._id === action.payload.postId);
 
         if (post) {
-          const alreadyLiked = post.likes.includes(demoUser._id);
+          const viewerId = action.payload.viewerId;
+          const alreadyLiked = post.likes.includes(viewerId);
           post.likes = alreadyLiked
-            ? post.likes.filter((id) => id !== demoUser._id)
-            : [...post.likes, demoUser._id];
+            ? post.likes.filter((id) => id !== viewerId)
+            : [...post.likes, viewerId];
         }
       })
       .addCase(commentPost.fulfilled, (state, action) => {
@@ -134,8 +139,8 @@ const postSlice = createSlice({
           post.comments.push({
             _id: `comment-${Date.now()}`,
             user: {
-              username: demoUser.username,
-              profilePhotos: demoUser.profilePhotos,
+              username: action.payload.user.username,
+              profilePhotos: action.payload.user.profilePhotos,
             },
             comment: action.payload.comment,
           });

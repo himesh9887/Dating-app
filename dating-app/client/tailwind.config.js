@@ -27,9 +27,9 @@ export default {
         panel: "0 18px 50px rgba(4, 8, 24, 0.35)",
       },
       fontFamily: {
-        display: ["Poppins", "ui-sans-serif", "system-ui"],
-        body: ["Manrope", "ui-sans-serif", "system-ui"],
-        logo: ["Grand Hotel", "cursive"],
+        display: ["system-ui", "ui-sans-serif", "sans-serif"],
+        body: ["system-ui", "ui-sans-serif", "sans-serif"],
+        logo: ["system-ui", "ui-sans-serif", "sans-serif"],
       },
       animation: {
         float: "float 6s ease-in-out infinite",
