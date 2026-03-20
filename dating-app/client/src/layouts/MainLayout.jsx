@@ -2,19 +2,26 @@ import { motion } from "framer-motion";
 import { Outlet, useLocation } from "react-router-dom";
 import BottomNav from "../components/instagram/BottomNav";
 import Navbar from "../components/instagram/Navbar";
+import { classNames } from "../utils/helpers";
 
 const MainLayout = () => {
   const location = useLocation();
   const pathname = location.pathname;
+  const isMessagesPage = pathname.startsWith("/messages");
   const hideGlobalNavbar =
     pathname === "/discover" ||
     pathname === "/search" ||
-    pathname.startsWith("/messages") ||
+    isMessagesPage ||
     pathname.startsWith("/profile/");
 
   return (
     <div className="min-h-screen bg-black text-white">
-      <div className="mx-auto min-h-screen w-full max-w-md bg-black lg:border-x lg:border-[#262626]">
+      <div
+        className={classNames(
+          "mx-auto min-h-screen w-full bg-black",
+          isMessagesPage ? "max-w-[1320px]" : "max-w-md lg:border-x lg:border-[#262626]",
+        )}
+      >
         <Navbar />
         <motion.main
           initial={{ opacity: 0, y: 14 }}
