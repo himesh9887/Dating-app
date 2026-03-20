@@ -3,31 +3,45 @@ import { Link } from "react-router-dom";
 import { formatDistance, getPrimaryPhoto } from "../../utils/helpers";
 
 const UserCard = ({ user, compact = false }) => (
-  <div className="glass-soft h-full p-3 sm:p-4">
+  <div className="glass-soft h-full rounded-[28px] border-white/10 bg-[linear-gradient(180deg,rgba(255,255,255,0.05),rgba(255,255,255,0.03))] p-4">
     <div className="flex h-full items-start gap-3">
       <img
         src={getPrimaryPhoto(user)}
         alt={user.name}
-        className={compact ? "h-12 w-12 rounded-2xl object-cover" : "h-16 w-16 rounded-3xl object-cover"}
+        className={
+          compact
+            ? "h-12 w-12 rounded-2xl border border-white/10 object-cover"
+            : "h-16 w-16 rounded-[22px] border border-white/10 object-cover"
+        }
       />
       <div className="min-w-0 flex-1">
-        <Link
-          to={`/profile/${user.username}`}
-          className="truncate font-display text-base font-semibold"
-        >
-          {user.name}
-        </Link>
-        <p className="text-sm text-white/[0.55]">@{user.username}</p>
-        <p className="mt-1 flex items-center gap-1 text-xs text-white/[0.45]">
+        <div className="flex items-start justify-between gap-3">
+          <div className="min-w-0">
+            <Link
+              to={`/profile/${user.username}`}
+              className="truncate text-[1rem] font-semibold text-white"
+            >
+              {user.name}
+            </Link>
+            <p className="mt-1 text-sm text-white/[0.52]">@{user.username}</p>
+          </div>
+          <span className="rounded-full bg-white/[0.04] px-2.5 py-1 text-[10px] font-semibold uppercase tracking-[0.2em] text-white/42">
+            New
+          </span>
+        </div>
+
+        <p className="mt-2 flex items-center gap-1.5 text-xs text-white/[0.48]">
           <MapPin size={12} />
           {formatDistance(user.distanceKm)}
         </p>
+
         {!compact ? (
-          <p className="mt-2 line-clamp-2 text-sm text-white/[0.55]">
+          <p className="mt-3 line-clamp-2 text-sm leading-6 text-white/[0.6]">
             {user.bio || "Fresh profile energy and ready to connect."}
           </p>
         ) : null}
       </div>
+
       <button
         type="button"
         className="spark-button-ghost self-center rounded-2xl px-3 py-2"

@@ -1,6 +1,8 @@
 import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import NotificationCard from "../../components/NotificationCard";
+import Loader from "../../components/common/Loader";
+import PageShell from "../../components/common/PageShell";
 import SectionHeader from "../../components/common/SectionHeader";
 import {
   fetchNotifications,
@@ -10,61 +12,72 @@ import {
 
 const NotificationsPage = () => {
   const dispatch = useDispatch();
-  const notifications = useSelector((state) => state.notifications.items);
+  const { items: notifications, status, error } = useSelector((state) => state.notifications);
+  const unreadCount = notifications.filter((item) => !item.isRead).length;
 
   useEffect(() => {
     dispatch(fetchNotifications());
   }, [dispatch]);
 
   return (
-    <div className="space-y-5">
-      <div className="grid gap-3 sm:grid-cols-3">
-        {[
-          ["All alerts", notifications.length],
-          ["Unread", notifications.filter((item) => !item.isRead).length],
-          ["Matches + chats", notifications.filter((item) => ["match", "message"].includes(item.type)).length],
-        ].map(([label, value]) => (
-          <div
-            key={label}
-            className="glass-soft p-4"
-          >
-            <p className="text-xs uppercase tracking-[0.22em] text-white/40">{label}</p>
-            <p className="mt-2 font-display text-2xl font-semibold">{value}</p>
-          </div>
-        ))}
-      </div>
-
-      <div className="glass-panel p-5">
+    <PageShell
+      eyebrow="Activity center"
+      title="Everything happening around your profile"
+      subtitle="Followers, likes, comments, matches, and messages stay organized in one clean stream so nothing important gets missed."
+      action={
+        <button
+          type="button"
+          onClick={() => dispatch(markAllNotificationsRead())}
+          className="spark-button-ghost"
+        >
+          Mark all read
+        </button>
+      }
+      stats={[
+        { label: "All alerts", value: notifications.length, meta: "Now" },
+        { label: "Unread", value: unreadCount, meta: unreadCount ? "New" : "Clear" },
+        {
+          label: "Matches + chats",
+          value: notifications.filter((item) => ["match", "message"].includes(item.type)).length,
+          meta: "Social",
+        },
+      ]}
+    >
+      <section className="glass-panel p-5 lg:p-6">
         <SectionHeader
           title="Notifications"
-          subtitle="Followers, likes, comments, matches, and messages in one stream."
-          action={
-            <button
-              type="button"
-              onClick={() => dispatch(markAllNotificationsRead())}
-              className="spark-button-ghost"
-            >
-              Mark all read
-            </button>
-          }
+          subtitle="Tap any alert to mark it as seen and keep your inbox feeling tidy."
         />
-        <div className="space-y-3">
-          {notifications.length ? (
-            notifications.map((notification) => (
+
+        {status === "loading" && !notifications.length ? (
+          <Loader label="Loading notifications..." />
+        ) : null}
+
+        {error && !notifications.length ? (
+          <div className="glass-soft p-8 text-center text-white/70">
+            {error}
+          </div>
+        ) : null}
+
+        {notifications.length ? (
+          <div className="space-y-3">
+            {notifications.map((notification) => (
               <NotificationCard
                 key={notification._id}
                 notification={notification}
                 onRead={(id) => dispatch(markNotificationRead(id))}
               />
-            ))
-          ) : (
-            <div className="glass-soft p-8 text-center text-white/60">
-              You're all caught up. New followers, likes, matches, and replies will land here.
-            </div>
-          )}
-        </div>
-      </div>
-    </div>
+            ))}
+          </div>
+        ) : null}
+
+        {!notifications.length && status === "succeeded" ? (
+          <div className="glass-soft p-8 text-center text-white/60">
+            You're all caught up. New followers, likes, matches, and replies will land here.
+          </div>
+        ) : null}
+      </section>
+    </PageShell>
   );
 };
 

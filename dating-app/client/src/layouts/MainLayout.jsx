@@ -8,6 +8,11 @@ const MainLayout = () => {
   const location = useLocation();
   const pathname = location.pathname;
   const isMessagesPage = pathname.startsWith("/messages");
+  const isWideShell =
+    pathname === "/matches" ||
+    pathname === "/notifications" ||
+    pathname === "/settings" ||
+    pathname === "/create";
   const hideGlobalNavbar =
     pathname === "/discover" ||
     pathname === "/search" ||
@@ -19,7 +24,9 @@ const MainLayout = () => {
       <div
         className={classNames(
           "mx-auto min-h-screen w-full bg-black",
-          isMessagesPage ? "max-w-[1320px]" : "max-w-md lg:border-x lg:border-[#262626]",
+          isMessagesPage || isWideShell
+            ? "max-w-[1320px]"
+            : "max-w-md lg:border-x lg:border-[#262626]",
         )}
       >
         <Navbar />

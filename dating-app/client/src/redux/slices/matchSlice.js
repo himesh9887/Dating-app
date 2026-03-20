@@ -52,13 +52,36 @@ const matchSlice = createSlice({
   },
   extraReducers: (builder) => {
     builder
+      .addCase(fetchDiscover.pending, (state) => {
+        state.status = "loading";
+        state.error = null;
+      })
       .addCase(fetchDiscover.fulfilled, (state, action) => {
+        state.status = "succeeded";
         state.discoverUsers = action.payload.users;
       })
+      .addCase(fetchDiscover.rejected, (state, action) => {
+        state.status = "failed";
+        state.error = action.payload;
+      })
+      .addCase(fetchMatches.pending, (state) => {
+        state.status = "loading";
+        state.error = null;
+      })
       .addCase(fetchMatches.fulfilled, (state, action) => {
+        state.status = "succeeded";
         state.matches = action.payload.matches;
       })
+      .addCase(fetchMatches.rejected, (state, action) => {
+        state.status = "failed";
+        state.error = action.payload;
+      })
+      .addCase(swipeProfile.pending, (state) => {
+        state.status = "loading";
+        state.error = null;
+      })
       .addCase(swipeProfile.fulfilled, (state, action) => {
+        state.status = "succeeded";
         state.discoverUsers = state.discoverUsers.filter(
           (user) => user._id !== action.payload.userId,
         );
@@ -67,6 +90,10 @@ const matchSlice = createSlice({
           state.latestMatch = action.payload.match;
           state.matches.unshift(action.payload.match);
         }
+      })
+      .addCase(swipeProfile.rejected, (state, action) => {
+        state.status = "failed";
+        state.error = action.payload;
       });
   },
 });

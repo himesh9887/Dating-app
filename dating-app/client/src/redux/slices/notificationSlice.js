@@ -41,12 +41,23 @@ const notificationSlice = createSlice({
   name: "notifications",
   initialState: {
     items: [],
+    status: "idle",
+    error: null,
   },
   reducers: {},
   extraReducers: (builder) => {
     builder
+      .addCase(fetchNotifications.pending, (state) => {
+        state.status = "loading";
+        state.error = null;
+      })
       .addCase(fetchNotifications.fulfilled, (state, action) => {
+        state.status = "succeeded";
         state.items = action.payload.notifications;
+      })
+      .addCase(fetchNotifications.rejected, (state, action) => {
+        state.status = "failed";
+        state.error = action.payload;
       })
       .addCase(markNotificationRead.fulfilled, (state, action) => {
         const item = state.items.find((notification) => notification._id === action.payload);
@@ -60,6 +71,12 @@ const notificationSlice = createSlice({
           ...notification,
           isRead: true,
         }));
+      })
+      .addCase(markNotificationRead.rejected, (state, action) => {
+        state.error = action.payload;
+      })
+      .addCase(markAllNotificationsRead.rejected, (state, action) => {
+        state.error = action.payload;
       });
   },
 });

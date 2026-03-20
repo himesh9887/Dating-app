@@ -1,8 +1,13 @@
 const SectionHeader = ({ title, subtitle, action }) => (
-  <div className="mb-4 flex flex-wrap items-end justify-between gap-4">
+  <div className="mb-5 flex flex-wrap items-end justify-between gap-4">
     <div className="min-w-0">
-      <h2 className="font-display text-2xl font-semibold">{title}</h2>
-      {subtitle ? <p className="mt-1 text-sm text-white/[0.55]">{subtitle}</p> : null}
+      <p className="text-[11px] font-semibold uppercase tracking-[0.24em] text-white/34">
+        Section
+      </p>
+      <h2 className="mt-2 font-display text-[1.65rem] font-semibold leading-tight text-white">
+        {title}
+      </h2>
+      {subtitle ? <p className="mt-2 max-w-2xl text-sm leading-6 text-white/[0.55]">{subtitle}</p> : null}
     </div>
     {action}
   </div>

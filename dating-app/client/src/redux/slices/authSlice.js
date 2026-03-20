@@ -84,6 +84,7 @@ const authSlice = createSlice({
     builder
       .addCase(loginUser.pending, (state) => {
         state.status = "loading";
+        state.error = null;
       })
       .addCase(loginUser.fulfilled, (state, action) => {
         state.status = "succeeded";
@@ -95,6 +96,7 @@ const authSlice = createSlice({
       })
       .addCase(signupUser.pending, (state) => {
         state.status = "loading";
+        state.error = null;
       })
       .addCase(signupUser.fulfilled, (state, action) => {
         state.status = "succeeded";
@@ -104,13 +106,30 @@ const authSlice = createSlice({
         state.status = "failed";
         state.error = action.payload;
       })
+      .addCase(googleAuth.pending, (state) => {
+        state.status = "loading";
+        state.error = null;
+      })
       .addCase(googleAuth.fulfilled, (state, action) => {
         state.status = "succeeded";
         persistAuth(state, action.payload);
       })
+      .addCase(googleAuth.rejected, (state, action) => {
+        state.status = "failed";
+        state.error = action.payload;
+      })
+      .addCase(loadCurrentUser.pending, (state) => {
+        state.status = "loading";
+        state.error = null;
+      })
       .addCase(loadCurrentUser.fulfilled, (state, action) => {
+        state.status = "succeeded";
         state.user = action.payload.user;
         state.isAuthenticated = true;
+      })
+      .addCase(loadCurrentUser.rejected, (state, action) => {
+        state.status = "failed";
+        state.error = action.payload;
       })
       .addCase(updateProfile.fulfilled, (state, action) => {
         state.user = action.payload.user;
