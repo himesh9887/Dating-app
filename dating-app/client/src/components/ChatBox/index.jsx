@@ -67,7 +67,7 @@ const ChatBox = ({ conversation, onBack, isMobileDetail = false }) => {
 
         <div className="flex flex-1 items-center justify-center px-6 py-10 text-center">
           <div className="max-w-sm">
-            <div className="mx-auto flex h-16 w-16 items-center justify-center rounded-full bg-[#3797f0]/15 text-[1rem] font-semibold tracking-[0.18em] text-[#9bd0ff]">
+            <div className="mx-auto flex h-16 w-16 items-center justify-center rounded-full bg-spark-cyan/15 text-[1rem] font-semibold tracking-[0.18em] text-spark-cyan">
               DM
             </div>
             <p className="mt-5 text-[11px] font-semibold uppercase tracking-[0.28em] text-white/30">
@@ -148,7 +148,7 @@ const ChatBox = ({ conversation, onBack, isMobileDetail = false }) => {
           </button>
         ) : null}
 
-        <div className="rounded-full bg-[linear-gradient(135deg,rgba(55,151,240,0.92),rgba(173,99,255,0.65))] p-[2px]">
+        <div className="rounded-full bg-spark-gradient p-[2px]">
           <img
             src={getPrimaryPhoto(conversation.partner)}
             alt={conversation.partner.name}
@@ -162,7 +162,7 @@ const ChatBox = ({ conversation, onBack, isMobileDetail = false }) => {
               {conversation.partner.username || conversation.partner.name}
             </h3>
             {typingState?.isTyping ? (
-              <span className="rounded-full bg-[#3797f0]/14 px-2 py-1 text-[10px] font-semibold uppercase tracking-[0.2em] text-[#9ed1ff]">
+              <span className="rounded-full bg-spark-cyan/14 px-2 py-1 text-[10px] font-semibold uppercase tracking-[0.2em] text-spark-cyan">
                 Live
               </span>
             ) : null}
@@ -192,7 +192,7 @@ const ChatBox = ({ conversation, onBack, isMobileDetail = false }) => {
 
       <div
         ref={messageListRef}
-        className="spark-scrollbar flex-1 overflow-y-auto bg-[radial-gradient(circle_at_top,_rgba(55,151,240,0.08),_rgba(0,0,0,0)_34%)] px-4 py-4 sm:px-5"
+        className="spark-scrollbar flex-1 overflow-y-auto bg-[radial-gradient(circle_at_top,_rgba(244,193,108,0.08),_rgba(0,0,0,0)_34%)] px-4 py-4 sm:px-5"
       >
         {messages.length ? (
           <div className="mx-auto flex w-full max-w-3xl flex-col gap-3">
@@ -212,7 +212,7 @@ const ChatBox = ({ conversation, onBack, isMobileDetail = false }) => {
                     className={classNames(
                       "max-w-[86%] rounded-[24px] px-4 py-3 shadow-[0_14px_34px_rgba(0,0,0,0.18)] sm:max-w-[76%]",
                       own
-                        ? "rounded-br-[10px] bg-[linear-gradient(135deg,#3797f0,#5ab2ff)] text-white"
+                        ? "rounded-br-[10px] bg-spark-gradient text-spark-base"
                         : "rounded-bl-[10px] border border-white/10 bg-white/[0.05] text-white/92",
                     )}
                   >
@@ -224,7 +224,7 @@ const ChatBox = ({ conversation, onBack, isMobileDetail = false }) => {
                       )}
                     >
                       <span>{formatTimeAgo(message.createdAt)}</span>
-                      {own && message.seenStatus ? <span className="text-[#d7eeff]">Seen</span> : null}
+                      {own && message.seenStatus ? <span className="text-white/88">Seen</span> : null}
                     </div>
                   </div>
                 </div>
@@ -280,7 +280,7 @@ const ChatBox = ({ conversation, onBack, isMobileDetail = false }) => {
 
           <button
             type="submit"
-            className="mb-0.5 flex h-11 w-11 items-center justify-center rounded-full bg-[linear-gradient(135deg,#3797f0,#5ab2ff)] text-white shadow-[0_12px_26px_rgba(55,151,240,0.3)] transition hover:brightness-110"
+            className="mb-0.5 flex h-11 w-11 items-center justify-center rounded-full bg-spark-gradient text-spark-base shadow-glow transition hover:brightness-110"
             aria-label="Send message"
           >
             <SendHorizontal size={16} />

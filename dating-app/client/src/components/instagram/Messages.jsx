@@ -45,14 +45,14 @@ const NoteCard = ({ item }) => (
       <div className="absolute left-1/2 top-0 w-[92px] -translate-x-1/2 rounded-[20px] border border-white/10 bg-[#171c24] px-3 py-2 text-left text-[13px] leading-4 text-white/78 shadow-[0_16px_32px_rgba(0,0,0,0.28)]">
         {item.note}
       </div>
-      <div className="relative rounded-full bg-[linear-gradient(135deg,rgba(55,151,240,0.85),rgba(173,99,255,0.65))] p-[2px]">
+      <div className="relative rounded-full bg-spark-gradient p-[2px]">
         <img
           src={item.image}
           alt={item.title}
           className="h-[76px] w-[76px] rounded-full border-2 border-[#0b0f15] object-cover"
         />
         {item.hasBadge ? (
-          <span className="absolute -right-1 top-1 h-[14px] w-[14px] rounded-full border-2 border-[#0b0f15] bg-pink-500" />
+          <span className="absolute -right-1 top-1 h-[14px] w-[14px] rounded-full border-2 border-[#0b0f15] bg-spark-coral" />
         ) : null}
       </div>
     </div>
@@ -74,7 +74,7 @@ const ConversationRow = ({ conversation, active, onOpenConversation }) => {
       className={classNames(
         "group flex w-full items-center gap-3 rounded-[26px] border px-3 py-3.5 text-left transition-all duration-300",
         active
-          ? "border-[#3797f0]/45 bg-[linear-gradient(135deg,rgba(55,151,240,0.18),rgba(18,22,29,0.96))] shadow-[0_18px_40px_rgba(13,24,40,0.35)]"
+          ? "border-white/14 bg-[linear-gradient(135deg,rgba(113,223,243,0.12),rgba(255,139,107,0.08),rgba(18,22,29,0.96))] shadow-[0_18px_40px_rgba(13,24,40,0.35)]"
           : "border-white/5 bg-white/[0.02] hover:border-white/12 hover:bg-white/[0.04]",
       )}
     >
@@ -85,7 +85,7 @@ const ConversationRow = ({ conversation, active, onOpenConversation }) => {
           className="h-[58px] w-[58px] rounded-full border border-white/10 object-cover shadow-[0_12px_26px_rgba(0,0,0,0.3)]"
         />
         {hasUnread ? (
-          <span className="absolute -bottom-1 -right-1 flex h-5 min-w-5 items-center justify-center rounded-full border-2 border-[#0b0f15] bg-[#0095f6] px-1 text-[10px] font-semibold text-white">
+          <span className="absolute -bottom-1 -right-1 flex h-5 min-w-5 items-center justify-center rounded-full border-2 border-[#0b0f15] bg-spark-coral px-1 text-[10px] font-semibold text-white">
             {conversation.unreadCount}
           </span>
         ) : null}
@@ -104,7 +104,7 @@ const ConversationRow = ({ conversation, active, onOpenConversation }) => {
             <span
               className={classNames(
                 "shrink-0 pt-0.5 text-[10px] font-semibold uppercase tracking-[0.2em]",
-                hasUnread ? "text-[#9bd0ff]" : "text-white/34",
+                hasUnread ? "text-spark-cyan" : "text-white/34",
               )}
             >
               {messageAge}
@@ -235,7 +235,7 @@ const Messages = () => {
   };
 
   return (
-    <div className="min-h-screen bg-[radial-gradient(circle_at_top,_rgba(55,151,240,0.16),_rgba(5,8,13,0.94)_34%,_#020203_100%)] text-white">
+    <div className="min-h-screen bg-[radial-gradient(circle_at_top,_rgba(244,193,108,0.12),_rgba(5,8,13,0.94)_32%,_#020203_100%)] text-white">
       <div className="mx-auto flex min-h-[calc(100vh-5rem)] w-full max-w-6xl flex-col gap-4 px-4 pb-24 pt-4 lg:flex-row lg:px-6 lg:pb-28">
         <aside
           className={classNames(
@@ -279,7 +279,7 @@ const Messages = () => {
               </div>
             </header>
 
-            <div className="mt-4 rounded-[28px] border border-white/10 bg-[linear-gradient(135deg,rgba(55,151,240,0.24),rgba(11,15,21,0.92))] p-4 shadow-[0_18px_44px_rgba(5,10,19,0.36)]">
+            <div className="mt-4 rounded-[28px] border border-white/10 bg-[linear-gradient(135deg,rgba(244,193,108,0.22),rgba(113,223,243,0.12),rgba(11,15,21,0.92))] p-4 shadow-[0_18px_44px_rgba(5,10,19,0.36)]">
               <p className="text-[11px] font-semibold uppercase tracking-[0.26em] text-white/48">
                 Your inbox
               </p>
@@ -326,7 +326,7 @@ const Messages = () => {
                 </div>
                 <button
                   type="button"
-                  className="shrink-0 text-[12px] font-semibold text-[#8fcbff] transition hover:text-white"
+                  className="shrink-0 text-[12px] font-semibold text-spark-cyan transition hover:text-white"
                 >
                   View
                 </button>
@@ -369,7 +369,7 @@ const Messages = () => {
                     className={classNames(
                       "flex h-11 shrink-0 items-center gap-2 rounded-full border px-[18px] text-[14px] font-medium transition-all duration-300 active:scale-95",
                       activeFilter === tab.key
-                        ? "border-[#3797f0]/35 bg-[#212933] text-white shadow-[0_14px_30px_rgba(17,30,49,0.26)]"
+                        ? "border-white/14 bg-white/[0.08] text-white shadow-[0_14px_30px_rgba(17,30,49,0.26)]"
                         : "border-white/10 bg-white/[0.02] text-white/72 hover:bg-white/[0.04]",
                     )}
                   >

@@ -82,7 +82,7 @@ const SettingsPage = () => {
                   Name
                 </p>
                 <input
-                  className="mt-3 w-full bg-transparent text-[15px] text-white placeholder:text-white/30"
+                  className="spark-input mt-3 border-0 bg-white/[0.04] px-0 py-0 text-[15px] focus:bg-transparent"
                   value={form.name}
                   onChange={(event) => setForm((current) => ({ ...current, name: event.target.value }))}
                   placeholder="Your display name"
@@ -93,7 +93,7 @@ const SettingsPage = () => {
                   Location
                 </p>
                 <input
-                  className="mt-3 w-full bg-transparent text-[15px] text-white placeholder:text-white/30"
+                  className="spark-input mt-3 border-0 bg-white/[0.04] px-0 py-0 text-[15px] focus:bg-transparent"
                   value={form.location}
                   onChange={(event) => setForm((current) => ({ ...current, location: event.target.value }))}
                   placeholder="City or area"
@@ -131,7 +131,7 @@ const SettingsPage = () => {
                     type="checkbox"
                     checked={form[key]}
                     onChange={(event) => setForm((current) => ({ ...current, [key]: event.target.checked }))}
-                    className="h-4 w-4 accent-pink-500"
+                    className="h-4 w-4 accent-spark-coral"
                   />
                 </label>
               ))}
@@ -167,7 +167,7 @@ const SettingsPage = () => {
 
         <div className="space-y-5">
           <section className="glass-panel p-5">
-            <div className="inline-flex rounded-2xl bg-spark-button p-3 shadow-glow">
+            <div className="inline-flex rounded-2xl bg-spark-gradient p-3 text-spark-base shadow-glow">
               <Crown size={18} />
             </div>
             <h3 className="mt-4 font-display text-2xl font-semibold text-white">Spark Gold</h3>
@@ -193,7 +193,7 @@ const SettingsPage = () => {
           </section>
 
           <section className="glass-panel p-5">
-            <div className="inline-flex rounded-2xl bg-white/10 p-3 text-spark-blue">
+            <div className="inline-flex rounded-2xl bg-white/10 p-3 text-spark-cyan">
               <Shield size={18} />
             </div>
             <h3 className="mt-4 font-display text-xl font-semibold text-white">Safety controls</h3>

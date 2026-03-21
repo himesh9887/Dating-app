@@ -29,7 +29,7 @@ const AuthLayout = () => (
       <motion.section
         initial={{ opacity: 0, y: 24 }}
         animate={{ opacity: 1, y: 0 }}
-        className="glass-panel hidden overflow-hidden p-6 md:flex md:flex-col md:justify-between lg:p-10"
+        className="glass-panel relative hidden overflow-hidden p-6 md:flex md:flex-col md:justify-between lg:p-10"
       >
         <div className="absolute inset-0 spark-grid-bg opacity-[0.14]" />
 

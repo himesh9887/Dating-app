@@ -22,7 +22,7 @@ const Explore = () => {
   return (
     <div className="px-1 pb-4 sm:px-0">
       <div className="grid gap-5 xl:grid-cols-[320px_minmax(0,1fr)]">
-        <aside className="glass-panel h-fit overflow-hidden p-5">
+        <aside className="glass-panel relative h-fit overflow-hidden p-5">
           <div className="absolute inset-0 spark-grid-bg opacity-[0.12]" />
 
           <div className="relative">
