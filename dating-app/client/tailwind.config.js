@@ -5,35 +5,42 @@ export default {
     extend: {
       colors: {
         spark: {
-          base: "#070710",
-          panel: "#121220",
-          panelSoft: "#1b1b2d",
+          base: "#06111a",
+          canvas: "#081520",
+          ink: "#0d1d2b",
+          panel: "#122433",
+          panelSoft: "#172b3c",
           line: "rgba(255, 255, 255, 0.08)",
-          pink: "#ff4d8d",
-          orange: "#ff9a3d",
-          blue: "#6aa9ff",
-          mint: "#6df7c1",
+          gold: "#f4c16c",
+          coral: "#ff8b6b",
+          cyan: "#71dff3",
+          mint: "#8ef4d1",
         },
       },
       backgroundImage: {
+        "spark-hero":
+          "radial-gradient(circle at 12% 18%, rgba(244,193,108,0.18), transparent 28%), radial-gradient(circle at 84% 12%, rgba(113,223,243,0.16), transparent 26%), radial-gradient(circle at 82% 86%, rgba(255,139,107,0.14), transparent 22%), linear-gradient(160deg, #06111a 0%, #081520 38%, #0d1d2b 100%)",
         "spark-gradient":
-          "radial-gradient(circle at top left, rgba(255,77,141,0.24), transparent 32%), radial-gradient(circle at top right, rgba(106,169,255,0.18), transparent 28%), linear-gradient(160deg, #070710 0%, #0f1020 55%, #171935 100%)",
+          "linear-gradient(135deg, rgba(244,193,108,0.96) 0%, rgba(255,139,107,0.92) 56%, rgba(113,223,243,0.9) 100%)",
         "spark-card":
-          "linear-gradient(135deg, rgba(255,255,255,0.18), rgba(255,255,255,0.04))",
-        "spark-button": "linear-gradient(135deg, #ff4d8d 0%, #ff9a3d 100%)",
+          "linear-gradient(180deg, rgba(255,255,255,0.08), rgba(255,255,255,0.03))",
+        "spark-grid":
+          "linear-gradient(rgba(255,255,255,0.06) 1px, transparent 1px), linear-gradient(90deg, rgba(255,255,255,0.06) 1px, transparent 1px)",
       },
       boxShadow: {
-        glow: "0 20px 60px rgba(255, 77, 141, 0.18)",
-        panel: "0 18px 50px rgba(4, 8, 24, 0.35)",
+        glow: "0 24px 60px rgba(255, 139, 107, 0.22)",
+        panel: "0 24px 90px rgba(0, 0, 0, 0.28)",
+        lift: "0 18px 40px rgba(5, 16, 26, 0.28)",
       },
       fontFamily: {
-        display: ["system-ui", "ui-sans-serif", "sans-serif"],
-        body: ["system-ui", "ui-sans-serif", "sans-serif"],
+        display: ["Sora", "ui-sans-serif", "sans-serif"],
+        body: ["Manrope", "ui-sans-serif", "sans-serif"],
         logo: ["Grand Hotel", "cursive"],
       },
       animation: {
-        float: "float 6s ease-in-out infinite",
-        pulseGlow: "pulseGlow 2.4s ease-in-out infinite",
+        float: "float 7s ease-in-out infinite",
+        pulseGlow: "pulseGlow 3s ease-in-out infinite",
+        drift: "drift 14s ease-in-out infinite",
       },
       keyframes: {
         float: {
@@ -41,8 +48,12 @@ export default {
           "50%": { transform: "translateY(-12px)" },
         },
         pulseGlow: {
-          "0%, 100%": { boxShadow: "0 0 0 rgba(255, 77, 141, 0.18)" },
-          "50%": { boxShadow: "0 0 30px rgba(255, 77, 141, 0.34)" },
+          "0%, 100%": { boxShadow: "0 0 0 rgba(255, 139, 107, 0.18)" },
+          "50%": { boxShadow: "0 0 36px rgba(113, 223, 243, 0.24)" },
+        },
+        drift: {
+          "0%, 100%": { transform: "translate3d(0, 0, 0) scale(1)" },
+          "50%": { transform: "translate3d(0, -18px, 0) scale(1.04)" },
         },
       },
     },

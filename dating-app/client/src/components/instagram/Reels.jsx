@@ -1,10 +1,4 @@
-import {
-  Bookmark,
-  Heart,
-  MessageCircle,
-  Music2,
-  Send,
-} from "lucide-react";
+import { Bookmark, Heart, MessageCircle, Music2, PlayCircle, Send } from "lucide-react";
 import { useState } from "react";
 import { getPrimaryPhoto } from "../../utils/helpers";
 import { demoReels } from "../../utils/mockData";
@@ -16,82 +10,108 @@ const Reels = () => {
   const [saved, setSaved] = useState({});
 
   return (
-    <div className="h-screen snap-y snap-mandatory overflow-y-auto bg-black text-white">
-      {demoReels.map((reel) => {
+    <div className="h-[calc(100vh-2rem)] snap-y snap-mandatory overflow-y-auto rounded-[34px] border border-white/10 bg-spark-base text-white shadow-panel">
+      {demoReels.map((reel, index) => {
         const isLiked = Boolean(liked[reel._id]);
         const isSaved = Boolean(saved[reel._id]);
 
         return (
           <section
             key={reel._id}
-            className="relative h-screen snap-start overflow-hidden bg-black"
+            className="relative flex min-h-full snap-start items-end overflow-hidden px-4 py-20 sm:px-6 lg:px-8"
           >
             <img
               src={reel.media.url}
               alt={reel.caption}
-              className="h-screen w-full object-cover"
+              className="absolute inset-0 h-full w-full object-cover"
             />
 
-            <div className="absolute inset-0 bg-gradient-to-b from-black/25 via-transparent to-black/80" />
+            <div className="absolute inset-0 bg-[linear-gradient(180deg,rgba(6,17,26,0.24),rgba(6,17,26,0.42),rgba(6,17,26,0.92))]" />
 
-            <div className="absolute bottom-24 right-3 flex flex-col gap-4 text-white">
-              <button
-                type="button"
-                onClick={() => setLiked((current) => ({ ...current, [reel._id]: !current[reel._id] }))}
-                className="flex flex-col items-center gap-1 transition-all duration-300 hover:scale-105 active:scale-95"
-              >
-                <Heart
-                  size={28}
-                  className={isLiked ? "fill-current text-[#ed4956]" : ""}
-                />
-                <span className="text-xs font-semibold">
-                  {formatCount(reel.likes + (isLiked ? 1 : 0))}
-                </span>
-              </button>
-
-              <button
-                type="button"
-                className="flex flex-col items-center gap-1 transition-all duration-300 hover:scale-105 active:scale-95"
-              >
-                <MessageCircle size={28} />
-                <span className="text-xs font-semibold">{formatCount(reel.comments)}</span>
-              </button>
-
-              <button
-                type="button"
-                className="flex flex-col items-center gap-1 transition-all duration-300 hover:scale-105 active:scale-95"
-              >
-                <Send size={28} />
-                <span className="text-xs font-semibold">{formatCount(reel.shares)}</span>
-              </button>
-
-              <button
-                type="button"
-                onClick={() => setSaved((current) => ({ ...current, [reel._id]: !current[reel._id] }))}
-                className="flex flex-col items-center gap-1 transition-all duration-300 hover:scale-105 active:scale-95"
-              >
-                <Bookmark size={28} className={isSaved ? "fill-current" : ""} />
-              </button>
+            <div className="absolute inset-x-0 top-0 flex items-center justify-between px-4 pb-4 pt-5 sm:px-6 lg:px-8">
+              <span className="spark-badge bg-black/20 backdrop-blur-xl">
+                <PlayCircle size={12} />
+                Discover reel {index + 1}
+              </span>
+              <span className="rounded-full border border-white/10 bg-black/20 px-3 py-1.5 text-[11px] uppercase tracking-[0.22em] text-white/66 backdrop-blur-xl">
+                {formatCount(reel.remixes || reel.comments)} interactions
+              </span>
             </div>
 
-            <div className="absolute bottom-5 left-3 right-20 text-white">
-              <div className="flex items-center gap-3">
-                <img
-                  src={getPrimaryPhoto(reel.author)}
-                  alt={reel.author.username}
-                  className="h-10 w-10 rounded-full border border-white/20 object-cover"
-                />
-                <div className="min-w-0">
-                  <p className="truncate text-sm font-semibold">{reel.author.username}</p>
-                  <p className="mt-1 flex items-center gap-1 text-xs text-white/80">
-                    <Music2 size={13} />
-                    <span className="truncate">{reel.audio}</span>
-                  </p>
+            <div className="relative mx-auto flex w-full max-w-6xl flex-col gap-4 lg:flex-row lg:items-end lg:justify-between">
+              <div className="glass-panel max-w-xl p-5 sm:p-6">
+                <div className="flex items-center gap-3">
+                  <img
+                    src={getPrimaryPhoto(reel.author)}
+                    alt={reel.author.username}
+                    className="h-12 w-12 rounded-full border border-white/20 object-cover"
+                  />
+                  <div className="min-w-0">
+                    <p className="truncate text-sm font-semibold text-white">
+                      {reel.author.username}
+                    </p>
+                    <p className="mt-1 truncate text-xs uppercase tracking-[0.22em] text-white/40">
+                      @{reel.author.name?.replace(/\s+/g, "").toLowerCase() || "creator"}
+                    </p>
+                  </div>
+                </div>
+
+                <p className="mt-4 text-[15px] leading-7 text-white/82">{reel.caption}</p>
+
+                <div className="mt-4 flex items-center gap-2 text-sm text-white/72">
+                  <Music2
+                    size={15}
+                    className="text-spark-cyan"
+                  />
+                  <span className="truncate">{reel.audio}</span>
                 </div>
               </div>
-              <p className="mt-3 max-w-[18rem] text-sm text-white">
-                {reel.caption}
-              </p>
+
+              <div className="glass-panel flex w-full max-w-[92px] flex-row justify-between gap-2 p-3 lg:flex-col">
+                {[
+                  {
+                    key: "likes",
+                    icon: Heart,
+                    count: formatCount(reel.likes + (isLiked ? 1 : 0)),
+                    active: isLiked,
+                    onClick: () =>
+                      setLiked((current) => ({ ...current, [reel._id]: !current[reel._id] })),
+                  },
+                  {
+                    key: "comments",
+                    icon: MessageCircle,
+                    count: formatCount(reel.comments),
+                  },
+                  {
+                    key: "shares",
+                    icon: Send,
+                    count: formatCount(reel.shares),
+                  },
+                  {
+                    key: "save",
+                    icon: Bookmark,
+                    count: isSaved ? "Saved" : "Save",
+                    active: isSaved,
+                    onClick: () =>
+                      setSaved((current) => ({ ...current, [reel._id]: !current[reel._id] })),
+                  },
+                ].map(({ key, icon: Icon, count, active, onClick }) => (
+                  <button
+                    key={key}
+                    type="button"
+                    onClick={onClick}
+                    className="flex flex-1 flex-col items-center gap-2 rounded-[18px] border border-white/10 bg-white/[0.04] px-3 py-3 transition hover:bg-white/[0.08]"
+                  >
+                    <Icon
+                      size={18}
+                      className={active ? "fill-current text-[#ff7a6c]" : ""}
+                    />
+                    <span className="text-[11px] font-semibold uppercase tracking-[0.18em] text-white/66">
+                      {count}
+                    </span>
+                  </button>
+                ))}
+              </div>
             </div>
           </section>
         );

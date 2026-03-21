@@ -12,52 +12,55 @@ const ProfileCard = () => {
 
   return (
     <div className="glass-panel overflow-hidden p-5">
-      <div className="relative">
+      <div className="relative overflow-hidden rounded-[28px]">
         <img
           src={getPrimaryPhoto(user)}
           alt={user.name}
-          className="h-56 w-full rounded-[24px] object-cover sm:h-64"
+          className="h-64 w-full object-cover"
         />
-        <div className="absolute inset-x-0 bottom-0 rounded-b-[24px] bg-gradient-to-t from-black/70 to-transparent p-4">
-          <div className="flex items-end justify-between gap-3">
-            <div className="min-w-0">
-              <h3 className="font-display text-xl font-semibold">
-                {user.name}, {user.age}
-              </h3>
-              <p className="mt-1 flex items-center gap-1 text-sm text-white/70">
-                <MapPin size={14} />
-                {user.location?.label || "Location hidden"}
-              </p>
-            </div>
-            <span className="rounded-full border border-white/10 bg-black/30 px-3 py-1 text-xs font-semibold uppercase tracking-[0.2em] text-spark-mint">
-              {user.subscription?.plan || "free"}
-            </span>
-          </div>
+        <div className="absolute inset-0 bg-gradient-to-t from-spark-base via-black/20 to-transparent" />
+        <div className="absolute left-4 top-4">
+          <span className="spark-badge px-3 py-1 text-white/54">
+            <Crown size={12} />
+            {user.subscription?.plan || "free"}
+          </span>
+        </div>
+        <div className="absolute inset-x-0 bottom-0 p-5">
+          <h3 className="font-display text-[2rem] font-semibold leading-none text-white">
+            {user.name}, {user.age}
+          </h3>
+          <p className="mt-3 flex items-center gap-1.5 text-sm text-white/70">
+            <MapPin size={14} />
+            {user.location?.label || "Location hidden"}
+          </p>
         </div>
       </div>
-      <p className="mt-4 text-sm text-white/[0.65]">
+
+      <p className="mt-4 text-sm leading-7 text-white/[0.65]">
         {user.bio || "Add a bio so people can catch your vibe faster."}
       </p>
+
       <div className="mt-4 grid grid-cols-2 gap-3">
-        <div className="glass-soft p-4">
+        <div className="spark-stat">
           <div className="flex items-center gap-2 text-white/50">
-            <Sparkles size={16} />
+            <Sparkles size={16} className="text-spark-cyan" />
             Matches
           </div>
-          <p className="mt-2 font-display text-2xl font-semibold">
+          <p className="mt-3 font-display text-2xl font-semibold text-white">
             {user.matches?.length || 0}
           </p>
         </div>
-        <div className="glass-soft p-4">
+        <div className="spark-stat">
           <div className="flex items-center gap-2 text-white/50">
-            <Crown size={16} />
-            Premium
+            <Crown size={16} className="text-spark-gold" />
+            Plan
           </div>
-          <p className="mt-2 font-display text-2xl font-semibold capitalize">
+          <p className="mt-3 font-display text-2xl font-semibold capitalize text-white">
             {user.subscription?.plan || "free"}
           </p>
         </div>
       </div>
+
       <Link
         to={user?.username ? `/profile/${user.username}` : "/settings"}
         className="spark-button mt-4 w-full"

@@ -50,16 +50,17 @@ const SignupPage = () => {
       initial={{ opacity: 0, y: 18 }}
       animate={{ opacity: 1, y: 0 }}
     >
-      <div className="inline-flex items-center gap-2 rounded-full border border-white/10 bg-white/5 px-4 py-2 text-[11px] font-semibold uppercase tracking-[0.24em] text-white/62">
-        <Sparkles size={14} />
+      <span className="spark-badge">
+        <Sparkles size={12} />
         Start your era
-      </div>
+      </span>
 
-      <h2 className="mt-4 font-display text-3xl font-semibold sm:text-4xl">
+      <h2 className="mt-5 font-display text-4xl font-semibold text-white sm:text-5xl">
         Create your Spark profile
       </h2>
-      <p className="mt-3 text-sm leading-6 text-white/60">
-        Build a profile that looks intentional from day one with your vibe, bio, and key interests.
+      <p className="mt-4 max-w-xl text-sm leading-7 text-white/60">
+        Build a profile that looks intentional from the first screen, with clean identity,
+        memorable bio, and strong visual first impression.
       </p>
 
       <form
@@ -85,7 +86,7 @@ const SignupPage = () => {
               </p>
               <input
                 type={type}
-                className="mt-3 w-full bg-transparent text-[15px] text-white placeholder:text-white/30"
+                className="spark-input mt-3 border-0 bg-white/[0.04] px-0 py-0 text-[15px] focus:bg-transparent"
                 placeholder={label}
                 value={form[key]}
                 onChange={(event) => setForm((current) => ({ ...current, [key]: event.target.value }))}
@@ -99,19 +100,23 @@ const SignupPage = () => {
             Bio
           </p>
           <textarea
-            className="mt-3 min-h-24 w-full resize-none bg-transparent text-[15px] leading-7 text-white placeholder:text-white/30"
-            placeholder="Bio"
+            className="mt-3 min-h-28 w-full resize-none bg-transparent text-[15px] leading-7 text-white placeholder:text-white/30"
+            placeholder="Tell people what kind of energy you bring."
             value={form.bio}
             onChange={(event) => setForm((current) => ({ ...current, bio: event.target.value }))}
           />
         </label>
 
         <label className="glass-soft flex cursor-pointer items-center gap-3 p-4">
-          <ImagePlus size={18} />
+          <div className="flex h-11 w-11 items-center justify-center rounded-[16px] bg-white/[0.06] text-spark-cyan">
+            <ImagePlus size={18} />
+          </div>
           <div className="min-w-0 flex-1">
-            <p className="text-sm font-medium text-white">Profile photos</p>
+            <p className="text-sm font-semibold text-white">Profile photos</p>
             <p className="mt-1 text-xs text-white/50">
-              {form.profilePhotos?.length ? `${form.profilePhotos.length} file(s) selected` : "Upload profile photos to make your card stand out"}
+              {form.profilePhotos?.length
+                ? `${form.profilePhotos.length} file(s) selected`
+                : "Upload profile photos to make your card stand out"}
             </p>
           </div>
           <input
@@ -123,9 +128,12 @@ const SignupPage = () => {
         </label>
 
         <div className="glass-soft p-4">
-          <p className="text-[11px] font-semibold uppercase tracking-[0.22em] text-white/35">
-            Interests
-          </p>
+          <div className="flex items-center justify-between gap-3">
+            <p className="text-[11px] font-semibold uppercase tracking-[0.22em] text-white/35">
+              Interests
+            </p>
+            <span className="text-xs text-white/44">Pick up to 5</span>
+          </div>
           <div className="mt-4 flex flex-wrap gap-2">
             {interestOptions.map((interest) => (
               <button
@@ -134,7 +142,7 @@ const SignupPage = () => {
                 onClick={() => toggleInterest(interest)}
                 className={`rounded-full px-4 py-2 text-sm transition ${
                   form.interests.includes(interest)
-                    ? "bg-spark-button text-white shadow-glow"
+                    ? "bg-spark-gradient text-spark-base shadow-glow"
                     : "border border-white/10 bg-white/5 text-white/70"
                 }`}
               >

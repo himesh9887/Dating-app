@@ -3,14 +3,14 @@ import { Link } from "react-router-dom";
 import { formatDistance, getPrimaryPhoto } from "../../utils/helpers";
 
 const UserCard = ({ user, compact = false }) => (
-  <div className="glass-soft h-full rounded-[28px] border-white/10 bg-[linear-gradient(180deg,rgba(255,255,255,0.05),rgba(255,255,255,0.03))] p-4">
+  <div className="glass-soft h-full rounded-[28px] p-4">
     <div className="flex h-full items-start gap-3">
       <img
         src={getPrimaryPhoto(user)}
         alt={user.name}
         className={
           compact
-            ? "h-12 w-12 rounded-2xl border border-white/10 object-cover"
+            ? "h-12 w-12 rounded-[18px] border border-white/10 object-cover"
             : "h-16 w-16 rounded-[22px] border border-white/10 object-cover"
         }
       />
@@ -25,7 +25,7 @@ const UserCard = ({ user, compact = false }) => (
             </Link>
             <p className="mt-1 text-sm text-white/[0.52]">@{user.username}</p>
           </div>
-          <span className="rounded-full bg-white/[0.04] px-2.5 py-1 text-[10px] font-semibold uppercase tracking-[0.2em] text-white/42">
+          <span className="rounded-full bg-white/[0.05] px-2.5 py-1 text-[10px] font-semibold uppercase tracking-[0.2em] text-white/42">
             New
           </span>
         </div>
@@ -44,7 +44,7 @@ const UserCard = ({ user, compact = false }) => (
 
       <button
         type="button"
-        className="spark-button-ghost self-center rounded-2xl px-3 py-2"
+        className="spark-button-ghost self-center rounded-[18px] px-3 py-2"
       >
         <Heart size={15} />
       </button>

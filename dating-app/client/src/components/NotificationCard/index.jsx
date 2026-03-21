@@ -8,7 +8,7 @@ const NotificationCard = ({ notification, onRead }) => (
     className={`glass-soft flex w-full items-start gap-4 rounded-[28px] border p-4 text-left transition duration-300 ${
       notification.isRead
         ? "border-white/10 bg-white/[0.03] opacity-75"
-        : "border-[#3797f0]/18 bg-[linear-gradient(135deg,rgba(55,151,240,0.08),rgba(255,255,255,0.03))]"
+        : "border-white/14 bg-[linear-gradient(135deg,rgba(113,223,243,0.08),rgba(255,255,255,0.03))]"
     }`}
   >
     <div className="relative shrink-0">
@@ -18,7 +18,7 @@ const NotificationCard = ({ notification, onRead }) => (
         className="h-12 w-12 rounded-[18px] border border-white/10 object-cover"
       />
       {!notification.isRead ? (
-        <span className="absolute -right-1 -top-1 h-3.5 w-3.5 rounded-full border-2 border-[#11151d] bg-[#3797f0]" />
+        <span className="absolute -right-1 -top-1 h-3.5 w-3.5 rounded-full border-2 border-spark-base bg-spark-cyan" />
       ) : null}
     </div>
 
@@ -28,7 +28,7 @@ const NotificationCard = ({ notification, onRead }) => (
           <h3 className="truncate text-[1rem] font-semibold text-white">{notification.title}</h3>
           <p className="mt-1 text-sm leading-6 text-white/60">{notification.body}</p>
         </div>
-        <div className="shrink-0 rounded-full bg-white/[0.04] p-2 text-[#8ed2ff]">
+        <div className="shrink-0 rounded-full bg-white/[0.04] p-2 text-spark-cyan">
           <Bell size={14} />
         </div>
       </div>
