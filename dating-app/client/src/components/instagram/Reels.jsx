@@ -1,16 +1,21 @@
 import { Bookmark, Heart, MessageCircle, Music2, PlayCircle, Send } from "lucide-react";
 import { useState } from "react";
-import { getPrimaryPhoto } from "../../utils/helpers";
+import { classNames, getPrimaryPhoto } from "../../utils/helpers";
 import { demoReels } from "../../utils/mockData";
 
 const formatCount = (value = 0) => new Intl.NumberFormat("en-US").format(value);
 
-const Reels = () => {
+const Reels = ({ className }) => {
   const [liked, setLiked] = useState({});
   const [saved, setSaved] = useState({});
 
   return (
-    <div className="h-[calc(100vh-2rem)] snap-y snap-mandatory overflow-y-auto rounded-[34px] border border-white/10 bg-spark-base text-white shadow-panel">
+    <div
+      className={classNames(
+        "spark-scrollbar min-h-[680px] overflow-y-auto rounded-[34px] border border-white/10 bg-spark-base text-white shadow-panel lg:h-[calc(100vh-14rem)] lg:snap-y lg:snap-mandatory",
+        className,
+      )}
+    >
       {demoReels.map((reel, index) => {
         const isLiked = Boolean(liked[reel._id]);
         const isSaved = Boolean(saved[reel._id]);
@@ -18,7 +23,7 @@ const Reels = () => {
         return (
           <section
             key={reel._id}
-            className="relative flex min-h-full snap-start items-end overflow-hidden px-4 py-20 sm:px-6 lg:px-8"
+            className="relative flex min-h-[680px] items-end overflow-hidden px-4 py-20 sm:px-6 lg:min-h-full lg:px-8"
           >
             <img
               src={reel.media.url}
@@ -67,7 +72,7 @@ const Reels = () => {
                 </div>
               </div>
 
-              <div className="glass-panel flex w-full max-w-[92px] flex-row justify-between gap-2 p-3 lg:flex-col">
+              <div className="glass-panel flex w-full flex-row justify-between gap-2 p-3 sm:max-w-[420px] lg:max-w-[92px] lg:flex-col">
                 {[
                   {
                     key: "likes",

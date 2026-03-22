@@ -122,7 +122,7 @@ export const demoPosts = [
         type: "image",
       },
     ],
-    caption: '#🎂 How to let your oth... more',
+    caption: "Birthday energy, loud music, and one more reason to stay out late.",
     hashtags: [],
     likes: ["user-demo-1", "u4", "u5", "u7"],
     comments: [],

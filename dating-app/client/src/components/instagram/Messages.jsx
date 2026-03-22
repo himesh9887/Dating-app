@@ -235,194 +235,202 @@ const Messages = () => {
   };
 
   return (
-    <div className="min-h-screen bg-[radial-gradient(circle_at_top,_rgba(244,193,108,0.12),_rgba(5,8,13,0.94)_32%,_#020203_100%)] text-white">
-      <div className="mx-auto flex min-h-[calc(100vh-5rem)] w-full max-w-6xl flex-col gap-4 px-4 pb-24 pt-4 lg:flex-row lg:px-6 lg:pb-28">
-        <aside
-          className={classNames(
-            "min-h-0 w-full flex-col overflow-hidden rounded-[32px] border border-white/10 bg-[#0b0f15]/90 shadow-[0_24px_80px_rgba(0,0,0,0.42)] backdrop-blur-xl",
-            selectedConversationId ? "hidden lg:flex lg:w-[390px] xl:w-[420px]" : "flex lg:w-[390px] xl:w-[420px]",
-          )}
-        >
-          <div className="border-b border-white/10 px-4 pb-4 pt-3.5 sm:px-5">
-            <header className="flex items-center justify-between gap-3">
-              <button
-                type="button"
-                className="flex h-11 w-11 items-center justify-center rounded-2xl border border-white/10 bg-white/[0.04] text-white transition-all duration-300 hover:bg-white/[0.07]"
-                aria-label="Messages settings"
-              >
-                <ListFilter size={22} strokeWidth={1.9} />
-              </button>
+    <div className="px-1 pb-4 sm:px-0">
+      <div className="relative overflow-hidden rounded-[36px] border border-white/10 bg-[radial-gradient(circle_at_top,_rgba(244,193,108,0.14),_rgba(5,8,13,0.96)_38%,_#020203_100%)] text-white shadow-panel">
+        <div className="absolute inset-0 spark-grid-bg opacity-[0.08]" />
+        <div className="absolute left-[-8%] top-8 h-52 w-52 rounded-full bg-spark-gold/10 blur-3xl" />
+        <div className="absolute bottom-[-10%] right-[-4%] h-64 w-64 rounded-full bg-spark-cyan/10 blur-3xl" />
 
-              <button
-                type="button"
-                className="flex items-center gap-2 rounded-full px-2 py-1 text-[1.02rem] font-semibold text-white"
-              >
-                <span>{resolvedUser.username}</span>
-                <ChevronDown size={16} />
-              </button>
-
-              <div className="flex items-center gap-2">
+        <div className="relative mx-auto flex min-h-[calc(100vh-12rem)] w-full max-w-[1380px] flex-col gap-4 p-3 sm:p-4 lg:h-[calc(100vh-9rem)] lg:min-h-[760px] lg:flex-row lg:p-5">
+          <aside
+            className={classNames(
+              "min-h-0 w-full flex-col overflow-hidden rounded-[32px] border border-white/10 bg-[#0b0f15]/90 shadow-[0_24px_80px_rgba(0,0,0,0.42)] backdrop-blur-xl lg:h-full",
+              selectedConversationId
+                ? "hidden lg:flex lg:w-[390px] xl:w-[420px]"
+                : "flex lg:w-[390px] xl:w-[420px]",
+            )}
+          >
+            <div className="border-b border-white/10 px-4 pb-4 pt-3.5 sm:px-5">
+              <header className="flex items-center justify-between gap-3">
                 <button
                   type="button"
                   className="flex h-11 w-11 items-center justify-center rounded-2xl border border-white/10 bg-white/[0.04] text-white transition-all duration-300 hover:bg-white/[0.07]"
-                  aria-label="Inbox activity"
+                  aria-label="Messages settings"
                 >
-                  <TrendingUp size={20} strokeWidth={2} />
+                  <ListFilter size={22} strokeWidth={1.9} />
                 </button>
-                <button
-                  type="button"
-                  className="flex h-11 w-11 items-center justify-center rounded-2xl border border-white/10 bg-white/[0.04] text-white transition-all duration-300 hover:bg-white/[0.07]"
-                  aria-label="Compose message"
-                >
-                  <SquarePen size={20} strokeWidth={2} />
-                </button>
-              </div>
-            </header>
-
-            <div className="mt-4 rounded-[28px] border border-white/10 bg-[linear-gradient(135deg,rgba(244,193,108,0.22),rgba(113,223,243,0.12),rgba(11,15,21,0.92))] p-4 shadow-[0_18px_44px_rgba(5,10,19,0.36)]">
-              <p className="text-[11px] font-semibold uppercase tracking-[0.26em] text-white/48">
-                Your inbox
-              </p>
-              <div className="mt-3 flex items-end justify-between gap-4">
-                <div className="max-w-[220px]">
-                  <h1 className="text-[1.55rem] font-semibold leading-tight text-white">
-                    Messages
-                  </h1>
-                  <p className="mt-2 text-[14px] leading-6 text-white/74">
-                    Cleaner chat layout, better spacing, and easier reading across every thread.
-                  </p>
-                </div>
-
-                <div className="shrink-0 rounded-[22px] border border-white/10 bg-black/25 px-3.5 py-3 text-right">
-                  <p className="text-[10px] font-semibold uppercase tracking-[0.24em] text-white/42">
-                    Unread
-                  </p>
-                  <p className="mt-1 text-[1.2rem] font-semibold text-white">{totalUnread}</p>
-                </div>
-              </div>
-            </div>
-
-            <label className="mt-4 flex items-center gap-3 rounded-[22px] border border-white/10 bg-white/[0.04] px-4 py-3 text-white/54 shadow-[inset_0_1px_0_rgba(255,255,255,0.03)]">
-              <Search size={18} strokeWidth={2} />
-              <input
-                value={searchValue}
-                onChange={(event) => setSearchValue(event.target.value)}
-                placeholder="Search messages or people"
-                className="w-full bg-transparent text-[15px] leading-6 text-white placeholder:text-white/42"
-              />
-            </label>
-          </div>
-
-          <div className="spark-scrollbar flex-1 overflow-y-auto px-4 pb-5 sm:px-5">
-            <section className="border-b border-white/6 py-4">
-              <div className="mb-4 flex items-start justify-between gap-3">
-                <div>
-                  <p className="text-[11px] font-semibold uppercase tracking-[0.24em] text-white/34">
-                    Notes
-                  </p>
-                  <p className="mt-1 text-[13px] leading-5 text-white/54">
-                    Quick prompts to keep conversations warm and easy to start.
-                  </p>
-                </div>
-                <button
-                  type="button"
-                  className="shrink-0 text-[12px] font-semibold text-spark-cyan transition hover:text-white"
-                >
-                  View
-                </button>
-              </div>
-
-              <div className="spark-scrollbar -mx-1 flex gap-4 overflow-x-auto px-1 pb-2">
-                {notes.map((item) => (
-                  <NoteCard
-                    key={item._id}
-                    item={item}
-                  />
-                ))}
-              </div>
-            </section>
-
-            <section className="py-4">
-              <div className="mb-4 flex items-center justify-between gap-3">
-                <div>
-                  <h2 className="text-[1.08rem] font-semibold text-white">Chats</h2>
-                  <p className="mt-1 text-[13px] text-white/52">
-                    {filteredConversations.length} conversations in {activeFilter}
-                  </p>
-                </div>
 
                 <button
                   type="button"
-                  className="flex h-10 w-10 items-center justify-center rounded-2xl border border-white/10 bg-white/[0.03] text-white/76 transition-all duration-300 hover:bg-white/[0.06] hover:text-white"
-                  aria-label="Filter conversations"
+                  className="flex items-center gap-2 rounded-full px-2 py-1 text-[1.02rem] font-semibold text-white"
                 >
-                  <SlidersHorizontal size={17} strokeWidth={2.1} />
+                  <span>{resolvedUser.username}</span>
+                  <ChevronDown size={16} />
                 </button>
-              </div>
 
-              <div className="spark-scrollbar mb-4 flex gap-3 overflow-x-auto pb-1">
-                {inboxTabs.map((tab) => (
+                <div className="flex items-center gap-2">
                   <button
-                    key={tab.key}
                     type="button"
-                    onClick={() => setActiveFilter(tab.key)}
-                    className={classNames(
-                      "flex h-11 shrink-0 items-center gap-2 rounded-full border px-[18px] text-[14px] font-medium transition-all duration-300 active:scale-95",
-                      activeFilter === tab.key
-                        ? "border-white/14 bg-white/[0.08] text-white shadow-[0_14px_30px_rgba(17,30,49,0.26)]"
-                        : "border-white/10 bg-white/[0.02] text-white/72 hover:bg-white/[0.04]",
-                    )}
+                    className="flex h-11 w-11 items-center justify-center rounded-2xl border border-white/10 bg-white/[0.04] text-white transition-all duration-300 hover:bg-white/[0.07]"
+                    aria-label="Inbox activity"
                   >
-                    <span>{tab.label}</span>
-                    <span
-                      className={classNames(
-                        "rounded-full px-2 py-0.5 text-[11px] font-semibold",
-                        activeFilter === tab.key ? "bg-black/20 text-white" : "bg-white/6 text-white/60",
-                      )}
-                    >
-                      {tabCounts[tab.key] || 0}
-                    </span>
+                    <TrendingUp size={20} strokeWidth={2} />
                   </button>
-                ))}
-              </div>
+                  <button
+                    type="button"
+                    className="flex h-11 w-11 items-center justify-center rounded-2xl border border-white/10 bg-white/[0.04] text-white transition-all duration-300 hover:bg-white/[0.07]"
+                    aria-label="Compose message"
+                  >
+                    <SquarePen size={20} strokeWidth={2} />
+                  </button>
+                </div>
+              </header>
 
-              <div className="space-y-2.5">
-                {filteredConversations.length ? (
-                  filteredConversations.map((conversation) => (
-                    <ConversationRow
-                      key={conversation._id}
-                      conversation={conversation}
-                      active={selectedConversationId === conversation._id}
-                      onOpenConversation={handleOpenConversation}
-                    />
-                  ))
-                ) : (
-                  <div className="rounded-[26px] border border-white/10 bg-white/[0.03] px-5 py-8 text-center">
-                    <p className="text-[11px] font-semibold uppercase tracking-[0.24em] text-white/34">
-                      No matches
-                    </p>
-                    <p className="mt-3 text-[14px] leading-6 text-white/56">
-                      No chats match this search yet. Try another name or switch inbox tabs.
+              <div className="mt-4 rounded-[28px] border border-white/10 bg-[linear-gradient(135deg,rgba(244,193,108,0.22),rgba(113,223,243,0.12),rgba(11,15,21,0.92))] p-4 shadow-[0_18px_44px_rgba(5,10,19,0.36)]">
+                <p className="text-[11px] font-semibold uppercase tracking-[0.26em] text-white/48">
+                  Your inbox
+                </p>
+                <div className="mt-3 flex items-end justify-between gap-4">
+                  <div className="max-w-[220px]">
+                    <h1 className="text-[1.55rem] font-semibold leading-tight text-white">
+                      Messages
+                    </h1>
+                    <p className="mt-2 text-[14px] leading-6 text-white/74">
+                      Cleaner chat layout, better spacing, and easier reading across every thread.
                     </p>
                   </div>
-                )}
+
+                  <div className="shrink-0 rounded-[22px] border border-white/10 bg-black/25 px-3.5 py-3 text-right">
+                    <p className="text-[10px] font-semibold uppercase tracking-[0.24em] text-white/42">
+                      Unread
+                    </p>
+                    <p className="mt-1 text-[1.2rem] font-semibold text-white">{totalUnread}</p>
+                  </div>
+                </div>
               </div>
-            </section>
-          </div>
-        </aside>
 
-        {selectedConversationId ? (
-          <div className="w-full lg:hidden">
-            <ChatBox
-              conversation={activeConversation}
-              onBack={() => navigate("/messages")}
-              isMobileDetail
-            />
-          </div>
-        ) : null}
+              <label className="mt-4 flex items-center gap-3 rounded-[22px] border border-white/10 bg-white/[0.04] px-4 py-3 text-white/54 shadow-[inset_0_1px_0_rgba(255,255,255,0.03)]">
+                <Search size={18} strokeWidth={2} />
+                <input
+                  value={searchValue}
+                  onChange={(event) => setSearchValue(event.target.value)}
+                  placeholder="Search messages or people"
+                  className="w-full bg-transparent text-[15px] leading-6 text-white placeholder:text-white/42"
+                />
+              </label>
+            </div>
 
-        <div className="hidden min-h-0 lg:flex lg:flex-1">
-          <ChatBox conversation={activeConversation} />
+            <div className="spark-scrollbar flex-1 overflow-y-auto px-4 pb-5 sm:px-5">
+              <section className="border-b border-white/6 py-4">
+                <div className="mb-4 flex items-start justify-between gap-3">
+                  <div>
+                    <p className="text-[11px] font-semibold uppercase tracking-[0.24em] text-white/34">
+                      Notes
+                    </p>
+                    <p className="mt-1 text-[13px] leading-5 text-white/54">
+                      Quick prompts to keep conversations warm and easy to start.
+                    </p>
+                  </div>
+                  <button
+                    type="button"
+                    className="shrink-0 text-[12px] font-semibold text-spark-cyan transition hover:text-white"
+                  >
+                    View
+                  </button>
+                </div>
+
+                <div className="spark-scrollbar -mx-1 flex gap-4 overflow-x-auto px-1 pb-2">
+                  {notes.map((item) => (
+                    <NoteCard
+                      key={item._id}
+                      item={item}
+                    />
+                  ))}
+                </div>
+              </section>
+
+              <section className="py-4">
+                <div className="mb-4 flex items-center justify-between gap-3">
+                  <div>
+                    <h2 className="text-[1.08rem] font-semibold text-white">Chats</h2>
+                    <p className="mt-1 text-[13px] text-white/52">
+                      {filteredConversations.length} conversations in {activeFilter}
+                    </p>
+                  </div>
+
+                  <button
+                    type="button"
+                    className="flex h-10 w-10 items-center justify-center rounded-2xl border border-white/10 bg-white/[0.03] text-white/76 transition-all duration-300 hover:bg-white/[0.06] hover:text-white"
+                    aria-label="Filter conversations"
+                  >
+                    <SlidersHorizontal size={17} strokeWidth={2.1} />
+                  </button>
+                </div>
+
+                <div className="spark-scrollbar mb-4 flex gap-3 overflow-x-auto pb-1">
+                  {inboxTabs.map((tab) => (
+                    <button
+                      key={tab.key}
+                      type="button"
+                      onClick={() => setActiveFilter(tab.key)}
+                      className={classNames(
+                        "flex h-11 shrink-0 items-center gap-2 rounded-full border px-[18px] text-[14px] font-medium transition-all duration-300 active:scale-95",
+                        activeFilter === tab.key
+                          ? "border-white/14 bg-white/[0.08] text-white shadow-[0_14px_30px_rgba(17,30,49,0.26)]"
+                          : "border-white/10 bg-white/[0.02] text-white/72 hover:bg-white/[0.04]",
+                      )}
+                    >
+                      <span>{tab.label}</span>
+                      <span
+                        className={classNames(
+                          "rounded-full px-2 py-0.5 text-[11px] font-semibold",
+                          activeFilter === tab.key ? "bg-black/20 text-white" : "bg-white/6 text-white/60",
+                        )}
+                      >
+                        {tabCounts[tab.key] || 0}
+                      </span>
+                    </button>
+                  ))}
+                </div>
+
+                <div className="space-y-2.5">
+                  {filteredConversations.length ? (
+                    filteredConversations.map((conversation) => (
+                      <ConversationRow
+                        key={conversation._id}
+                        conversation={conversation}
+                        active={selectedConversationId === conversation._id}
+                        onOpenConversation={handleOpenConversation}
+                      />
+                    ))
+                  ) : (
+                    <div className="rounded-[26px] border border-white/10 bg-white/[0.03] px-5 py-8 text-center">
+                      <p className="text-[11px] font-semibold uppercase tracking-[0.24em] text-white/34">
+                        No matches
+                      </p>
+                      <p className="mt-3 text-[14px] leading-6 text-white/56">
+                        No chats match this search yet. Try another name or switch inbox tabs.
+                      </p>
+                    </div>
+                  )}
+                </div>
+              </section>
+            </div>
+          </aside>
+
+          {selectedConversationId ? (
+            <div className="w-full lg:hidden">
+              <ChatBox
+                conversation={activeConversation}
+                onBack={() => navigate("/messages")}
+                isMobileDetail
+              />
+            </div>
+          ) : null}
+
+          <div className="hidden min-h-0 lg:flex lg:flex-1">
+            <ChatBox conversation={activeConversation} />
+          </div>
         </div>
       </div>
     </div>

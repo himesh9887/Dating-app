@@ -10,19 +10,22 @@ const Explore = () => {
   const results = useSelector((state) => state.user.searchResults);
   const [query, setQuery] = useState("");
   const deferredQuery = useDeferredValue(query);
+  const trimmedQuery = query.trim();
+  const hasQuery = Boolean(trimmedQuery);
+  const visibleResults = hasQuery ? results.slice(0, 5) : [];
 
   useEffect(() => {
     dispatch(searchUsers({ q: deferredQuery }));
   }, [deferredQuery, dispatch]);
 
   const filteredTiles = demoExploreTiles.filter((tile) =>
-    query.trim() ? tile.title.toLowerCase().includes(query.trim().toLowerCase()) : true,
+    hasQuery ? tile.title.toLowerCase().includes(trimmedQuery.toLowerCase()) : true,
   );
 
   return (
     <div className="px-1 pb-4 sm:px-0">
       <div className="grid gap-5 xl:grid-cols-[320px_minmax(0,1fr)]">
-        <aside className="glass-panel relative h-fit overflow-hidden p-5">
+        <aside className="glass-panel relative h-fit overflow-hidden p-5 xl:sticky xl:top-6">
           <div className="absolute inset-0 spark-grid-bg opacity-[0.12]" />
 
           <div className="relative">
@@ -52,8 +55,8 @@ const Explore = () => {
             </label>
 
             <div className="mt-6 grid gap-3">
-              {results.length && query.trim() ? (
-                results.slice(0, 5).map((user) => (
+              {visibleResults.length ? (
+                visibleResults.map((user) => (
                   <Link
                     key={user._id}
                     to={`/profile/${user.username}`}
@@ -68,6 +71,10 @@ const Explore = () => {
                     <span className="spark-badge px-3 py-1 text-white/54">Open</span>
                   </Link>
                 ))
+              ) : hasQuery ? (
+                <div className="glass-soft p-4 text-sm leading-6 text-white/56">
+                  No profiles matched "{trimmedQuery}" yet. Try another name, username, or mood.
+                </div>
               ) : (
                 <div className="glass-soft p-4 text-sm leading-6 text-white/56">
                   Search results will appear here as you type. Until then, browse curated explore
@@ -91,37 +98,43 @@ const Explore = () => {
             <span className="text-sm text-white/50">{filteredTiles.length} results in the grid</span>
           </div>
 
-          <div className="mt-5 grid auto-rows-[10px] grid-cols-2 gap-3 md:grid-cols-3 xl:grid-cols-4">
-            {filteredTiles.map((tile, index) => (
-              <article
-                key={tile._id}
-                style={{ gridRow: `span ${tile.rows}` }}
-                className={index % 5 === 0 ? "md:col-span-2" : ""}
-              >
-                <div className="group relative h-full overflow-hidden rounded-[28px] border border-white/10 bg-spark-panel">
-                  <img
-                    src={tile.image}
-                    alt={tile.title}
-                    className="h-full w-full object-cover transition-all duration-500 group-hover:scale-105"
-                  />
-                  <div className="absolute inset-0 bg-gradient-to-t from-spark-base via-transparent to-transparent" />
-                  <div className="absolute inset-x-0 bottom-0 p-4">
-                    <div className="flex items-center justify-between gap-3">
-                      <div className="min-w-0">
-                        <p className="truncate text-sm font-semibold text-white">{tile.title}</p>
-                        <p className="mt-1 text-[11px] uppercase tracking-[0.22em] text-white/42">
-                          {tile.views} views
-                        </p>
+          {filteredTiles.length ? (
+            <div className="mt-5 grid auto-rows-[10px] grid-cols-2 gap-3 md:grid-cols-3 xl:grid-cols-4">
+              {filteredTiles.map((tile, index) => (
+                <article
+                  key={tile._id}
+                  style={{ gridRow: `span ${tile.rows}` }}
+                  className={index % 5 === 0 ? "md:col-span-2" : ""}
+                >
+                  <div className="group relative h-full overflow-hidden rounded-[28px] border border-white/10 bg-spark-panel">
+                    <img
+                      src={tile.image}
+                      alt={tile.title}
+                      className="h-full w-full object-cover transition-all duration-500 group-hover:scale-105"
+                    />
+                    <div className="absolute inset-0 bg-gradient-to-t from-spark-base via-transparent to-transparent" />
+                    <div className="absolute inset-x-0 bottom-0 p-4">
+                      <div className="flex items-center justify-between gap-3">
+                        <div className="min-w-0">
+                          <p className="truncate text-sm font-semibold text-white">{tile.title}</p>
+                          <p className="mt-1 text-[11px] uppercase tracking-[0.22em] text-white/42">
+                            {tile.views} views
+                          </p>
+                        </div>
+                        <span className="rounded-full border border-white/10 bg-black/30 px-3 py-1 text-[10px] font-semibold uppercase tracking-[0.18em] text-white/62">
+                          Trend
+                        </span>
                       </div>
-                      <span className="rounded-full border border-white/10 bg-black/30 px-3 py-1 text-[10px] font-semibold uppercase tracking-[0.18em] text-white/62">
-                        Trend
-                      </span>
                     </div>
                   </div>
-                </div>
-              </article>
-            ))}
-          </div>
+                </article>
+              ))}
+            </div>
+          ) : (
+            <div className="mt-5 glass-soft p-8 text-center text-sm leading-7 text-white/58">
+              No explore tiles match "{trimmedQuery}" right now. Try a broader search term.
+            </div>
+          )}
         </section>
       </div>
     </div>

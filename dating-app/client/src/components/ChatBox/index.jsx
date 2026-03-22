@@ -39,16 +39,16 @@ const ChatBox = ({ conversation, onBack, isMobileDetail = false }) => {
     });
   }, [conversation?._id, messages.length]);
 
+  const shellClass = classNames(
+    "flex w-full min-h-0 flex-col overflow-hidden text-white",
+    isMobileDetail
+      ? "min-h-[calc(100vh-14rem)] rounded-[32px] border border-white/10 bg-[#05070c]/92 shadow-[0_24px_80px_rgba(0,0,0,0.42)] backdrop-blur-xl"
+      : "h-full rounded-[32px] border border-white/10 bg-[#0b0f15]/90 shadow-[0_24px_80px_rgba(0,0,0,0.42)] backdrop-blur-xl",
+  );
+
   if (!conversation) {
     return (
-      <div
-        className={classNames(
-          "flex w-full flex-col overflow-hidden text-white",
-          isMobileDetail
-            ? "min-h-screen bg-[#05070c]"
-            : "min-h-[620px] rounded-[32px] border border-white/10 bg-[#0b0f15]/90 shadow-[0_24px_80px_rgba(0,0,0,0.42)] backdrop-blur-xl lg:min-h-[calc(100vh-7rem)]",
-        )}
-      >
+      <div className={shellClass}>
         {isMobileDetail ? (
           <div className="sticky top-0 z-20 flex items-center gap-3 border-b border-white/10 bg-[#06090f]/95 px-4 py-3 backdrop-blur-xl">
             {onBack ? (
@@ -123,14 +123,7 @@ const ChatBox = ({ conversation, onBack, isMobileDetail = false }) => {
   };
 
   return (
-    <div
-      className={classNames(
-        "flex w-full flex-col overflow-hidden text-white",
-        isMobileDetail
-          ? "min-h-screen bg-[#05070c]"
-          : "min-h-[620px] rounded-[32px] border border-white/10 bg-[#0b0f15]/90 shadow-[0_24px_80px_rgba(0,0,0,0.42)] backdrop-blur-xl lg:min-h-[calc(100vh-7rem)]",
-      )}
-    >
+    <div className={shellClass}>
       <div
         className={classNames(
           "flex items-center gap-3 border-b border-white/10 bg-[linear-gradient(180deg,rgba(14,19,27,0.98),rgba(10,13,18,0.92))]",
@@ -249,6 +242,7 @@ const ChatBox = ({ conversation, onBack, isMobileDetail = false }) => {
       <form
         onSubmit={handleSubmit}
         className="border-t border-white/10 bg-[#06090f]/95 p-3 backdrop-blur-xl sm:p-4"
+        style={isMobileDetail ? { paddingBottom: "calc(env(safe-area-inset-bottom, 0px) + 12px)" } : undefined}
       >
         <div className="mx-auto flex w-full max-w-3xl items-end gap-2 rounded-[28px] border border-white/10 bg-[#121821] px-3 py-2 shadow-[0_18px_40px_rgba(0,0,0,0.3)]">
           <button

@@ -14,11 +14,13 @@ const MainLayout = () => {
     pathname === "/notifications" ||
     pathname === "/settings" ||
     pathname === "/create";
-  const hideGlobalNavbar =
+  const isImmersivePage =
     pathname === "/discover" ||
     pathname === "/search" ||
     isMessagesPage ||
     pathname.startsWith("/profile/");
+  const hideGlobalNavbar =
+    isImmersivePage;
   const contentWidthClass = isMessagesPage
     ? "max-w-full"
     : pathname === "/home"
@@ -37,7 +39,7 @@ const MainLayout = () => {
         <div className="absolute bottom-[-10%] left-[24%] h-80 w-80 rounded-full bg-spark-coral/12 blur-3xl" />
       </div>
 
-      <div className="relative mx-auto flex min-h-screen w-full max-w-[1520px] gap-6 px-3 pb-28 pt-3 sm:px-4 lg:px-6 lg:pb-6 lg:pt-6">
+      <div className="relative mx-auto flex min-h-screen w-full max-w-[1520px] items-start gap-6 px-3 pb-[calc(env(safe-area-inset-bottom,0px)+6.8rem)] pt-3 sm:px-4 sm:pb-32 lg:px-6 lg:pb-6 lg:pt-6 xl:gap-8">
         <Sidebar />
 
         <div className="flex min-w-0 flex-1 flex-col gap-5">
@@ -46,7 +48,10 @@ const MainLayout = () => {
           <motion.main
             initial={{ opacity: 0, y: 14 }}
             animate={{ opacity: 1, y: 0 }}
-            className={classNames("min-w-0 flex-1", hideGlobalNavbar ? "" : "lg:pt-0")}
+            className={classNames(
+              "min-w-0 flex-1",
+              hideGlobalNavbar && isImmersivePage ? "lg:pt-1" : "lg:pt-0",
+            )}
           >
             <div className={classNames("mx-auto w-full", contentWidthClass)}>
               <Outlet />
